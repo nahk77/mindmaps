@@ -5,30 +5,15 @@ mindmaps.CanvasDrawingUtil = {
    * @param {Integer} depth the depth of the node
    * @returns {Number}
    */
-  getLineWidth : function(zoomFactor, depth) {
+  getLineWidth : function($node, zoomFactor, depth) {
     // var width = this.zoomFactor * (10 - depth);
     var width = zoomFactor * (12 - depth * 2);
+
+    width += $node.data().node.lineWidthOffset;
 
     if (width < 2) {
       width = 2;
     }
-
-    return width;
-  },
-
-  /**
-   * Calculates the width of a branch for a node for the given depth, taking
-   * into account the line width offset of the given node.
-   *
-   * @param {jQuery} $node
-   * @param {Integer} depth the depth of the node
-   * @returns {Number}
-   */
-  getLineWidthWithOffset : function($node, zoomFactor, depth) {
-    var width = this.getLineWidth(zoomFactor, depth);
-
-    console.log( $node.data().node.lineWidthOffset )
-    width += $node.data().node.lineWidthOffset;
 
     return width;
   },
@@ -154,7 +139,7 @@ mindmaps.CanvasBranchDrawer = function() {
       }
     }
 
-    var lineWidth = mindmaps.CanvasDrawingUtil.getLineWidthWithOffset($node,
+    var lineWidth = mindmaps.CanvasDrawingUtil.getLineWidth($node,
         zoomFactor, depth);
     var halfLineWidth = lineWidth / 2;
 
@@ -191,7 +176,7 @@ mindmaps.CanvasBranchDrawer = function() {
 
     // calculate difference in line width to parent node
     // and position line vertically centered to parent line
-    var pLineWidth = mindmaps.CanvasDrawingUtil.getLineWidthWithOffset($parent,
+    var pLineWidth = mindmaps.CanvasDrawingUtil.getLineWidth($parent,
         zoomFactor, depth - 1);
     var diff = (pLineWidth - lineWidth) / 2;
 

@@ -260,8 +260,8 @@ mindmaps.DefaultCanvasView = function() {
    * @param {Integer} depth the depth of the node
    * @returns {Number}
    */
-  this.getLineWidth = function(depth) {
-    return mindmaps.CanvasDrawingUtil.getLineWidth(this.zoomFactor, depth);
+  this.getLineWidth = function($node, depth) {
+    return mindmaps.CanvasDrawingUtil.getLineWidth($node, this.zoomFactor, depth);
   };
 
   /**
@@ -327,13 +327,13 @@ mindmaps.DefaultCanvasView = function() {
     $node.appendTo($parent);
 
     if (node.isRoot()) {
-      var w = this.getLineWidth(depth);
+      var w = this.getLineWidth($node, depth);
       $node.css("border-bottom-width", w);
     }
 
     if (!node.isRoot()) {
       // draw border and position manually only non-root nodes
-      var bThickness = this.getLineWidth(depth);
+      var bThickness = this.getLineWidth($node, depth);
       var bColor = node.branchColor;
       var bb = bThickness + "px solid " + bColor;
 
@@ -657,8 +657,12 @@ mindmaps.DefaultCanvasView = function() {
     var $node = $getNode(node);
     var $text = $getNodeCaption(node);
     var font = node.text.font;
+
+    var lineWidth = this.getLineWidth($node, node.getDepth())
+
     $node.css({
       "font-size" : font.size,
+      "border-bottom-width" : lineWidth,
       "border-bottom-color" : node.branchColor
     });
 
@@ -700,7 +704,7 @@ mindmaps.DefaultCanvasView = function() {
     var $root = this.$getDrawingArea().children().first();
     var root = $root.data("node");
 
-    var w = this.getLineWidth(0);
+    var w = this.getLineWidth($root, 0);
     $root.css("border-bottom-width", w);
 
     // handle root differently
@@ -721,7 +725,7 @@ mindmaps.DefaultCanvasView = function() {
       var $node = $getNode(node);
 
       // draw border and position manually
-      var bWidth = self.getLineWidth(depth);
+      var bWidth = self.getLineWidth($node, depth);
 
       $node.css({
         left : zoomFactor * node.offset.x,
@@ -959,12 +963,13 @@ mindmaps.DefaultCanvasView = function() {
         $wrapper.addClass("left");
       }
 
+      var $node = $getNode(node);
+
       // set border on our fake node for correct line drawing
       this.depth = node.getDepth();
-      var w = view.getLineWidth(this.depth + 1);
+      var w = view.getLineWidth($node, this.depth + 1);
       $fakeNode.css("border-bottom-width", w);
 
-      var $node = $getNode(node);
       $wrapper.appendTo($node);
     };
 

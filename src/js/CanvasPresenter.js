@@ -268,7 +268,7 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
 
     eventBus.subscribe(mindmaps.Event.NODE_LINE_WIDTH_CHANGED, function(
         node) {
-      view.redrawNodeConnectors(node);
+      view.updateNode(node);
     });
 
     eventBus.subscribe(mindmaps.Event.NODE_CREATED, function(node) {
