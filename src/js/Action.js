@@ -281,7 +281,7 @@ mindmaps.action.IncreaseNodeFontSizeAction = function(node) {
  */
 mindmaps.action.ChangeNodeLineWidthAction = function(node, step) {
   this.execute = function() {
-    node.text.lineWidthOffset += step;
+    node.lineWidthOffset += step;
   };
 
   this.event = [ mindmaps.Event.NODE_LINE_WIDTH_CHANGED, node ];
