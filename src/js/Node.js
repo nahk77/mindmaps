@@ -225,6 +225,10 @@ mindmaps.Node.prototype.getDepth = function() {
   return depth;
 };
 
+mindmaps.Node.prototype.getLineWidthOffset = function() {
+  return this.lineWidthOffset;
+}
+
 /**
  * Gets the children of the node. Traverses the whole sub tree if recursive is
  * true.
