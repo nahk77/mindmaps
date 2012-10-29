@@ -272,6 +272,44 @@ mindmaps.action.IncreaseNodeFontSizeAction = function(node) {
 };
 
 /**
+ * Creates a new ChageNodeLineWidthAction.
+ * 
+ * @constructor
+ * @augments mindmaps.action.Action
+ * @param {mindmaps.Node} node
+ * @param {Integer} step
+ */
+mindmaps.action.ChangeNodeLineWidthAction = function(node, step) {
+  this.execute = function() {
+    node.text.lineWidthOffset += step;
+  };
+
+  this.event = [ mindmaps.Event.NODE_LINE_WIDTH_CHANGED, node ];
+  this.undo = function() {
+    return new mindmaps.action.ChangeNodeLineWidthAction(node, -step);
+  };
+};
+mindmaps.action.ChangeNodeLineWidthAction.prototype = new mindmaps.action.Action();
+
+/**
+ * @constructor
+ * @param {mindmaps.Node} node
+ * @returns {ChangeNodeLineWidthAction}
+ */
+mindmaps.action.DecreaseNodeLineWidthAction = function(node) {
+  return new mindmaps.action.ChangeNodeLineWidthAction(node, -8);
+};
+
+/**
+ * @constructor
+ * @param {mindmaps.Node} node
+ * @returns {ChangeNodeLineWidthAction}
+ */
+mindmaps.action.IncreaseNodeLineWidthAction = function(node) {
+  return new mindmaps.action.ChangeNodeLineWidthAction(node, 8);
+};
+
+/**
  * Creates a new SetFontWeightAction.
  * 
  * @constructor

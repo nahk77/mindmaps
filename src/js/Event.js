@@ -56,6 +56,14 @@ mindmaps.Event = {
   NODE_FONT_CHANGED : "NodeFontChangedEvent",
 
   /**
+   * The width of a line leading to a node has changed.
+   * 
+   * @event
+   * @param {mindmaps.Node} node
+   */
+  NODE_LINE_WIDTH_CHANGED : "NodeLineWidthChangedEvent",
+
+  /**
    * Preview event for node font color changes.
    *
    * @event

@@ -10,6 +10,10 @@ mindmaps.InspectorView = function() {
       $content);
   var $sizeIncreaseButton = $("#inspector-button-font-size-increase",
       $content);
+  var $lineWidthDecreaseButton = $("#inspector-button-line-width-decrease",
+      $content);
+  var $lineWidthIncreaseButton = $("#inspector-button-line-width-increase",
+      $content);
   var $boldCheckbox = $("#inspector-checkbox-font-bold", $content);
   var $italicCheckbox = $("#inspector-checkbox-font-italic", $content);
   var $underlineCheckbox = $("#inspector-checkbox-font-underline", $content);
@@ -19,6 +23,7 @@ mindmaps.InspectorView = function() {
   var branchColorPicker = $("#inspector-branch-color-picker", $content);
   var fontColorPicker = $("#inspector-font-color-picker", $content);
   var $allButtons = [ $sizeDecreaseButton, $sizeIncreaseButton,
+      $lineWidthDecreaseButton, $lineWidthIncreaseButton,
       $boldCheckbox, $italicCheckbox, $underlineCheckbox,
       $linethroughCheckbox, $branchColorChildrenButton ];
   var $allColorpickers = [ branchColorPicker, fontColorPicker ];
@@ -121,6 +126,18 @@ mindmaps.InspectorView = function() {
       }
     });
 
+    $lineWidthDecreaseButton.click(function() {
+      if (self.lineWidthDecreaseButtonClicked) {
+        self.lineWidthDecreaseButtonClicked();
+      }
+    });
+
+    $lineWidthIncreaseButton.click(function() {
+      if (self.lineWidthIncreaseButtonClicked) {
+        self.lineWidthIncreaseButtonClicked();
+      }
+    });
+
     $boldCheckbox.click(function() {
       if (self.fontBoldCheckboxClicked) {
         var checked = $(this).prop("checked");
@@ -220,6 +237,18 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, view) {
 
   view.fontSizeIncreaseButtonClicked = function() {
     var action = new mindmaps.action.IncreaseNodeFontSizeAction(
+        mindmapModel.selectedNode);
+    mindmapModel.executeAction(action);
+  };
+
+  view.lineWidthDecreaseButtonClicked = function() {
+    var action = new mindmaps.action.DecreaseNodeLineWidthAction(
+        mindmapModel.selectedNode);
+    mindmapModel.executeAction(action);
+  };
+
+  view.lineWidthIncreaseButtonClicked = function() {
+    var action = new mindmaps.action.IncreaseNodeLineWidthAction(
         mindmapModel.selectedNode);
     mindmapModel.executeAction(action);
   };
