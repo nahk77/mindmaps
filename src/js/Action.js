@@ -297,7 +297,7 @@ mindmaps.action.ChangeNodeLineWidthAction.prototype = new mindmaps.action.Action
  * @returns {ChangeNodeLineWidthAction}
  */
 mindmaps.action.DecreaseNodeLineWidthAction = function(node) {
-  return new mindmaps.action.ChangeNodeLineWidthAction(node, -8);
+  return new mindmaps.action.ChangeNodeLineWidthAction(node, -2);
 };
 
 /**
@@ -306,7 +306,7 @@ mindmaps.action.DecreaseNodeLineWidthAction = function(node) {
  * @returns {ChangeNodeLineWidthAction}
  */
 mindmaps.action.IncreaseNodeLineWidthAction = function(node) {
-  return new mindmaps.action.ChangeNodeLineWidthAction(node, 8);
+  return new mindmaps.action.ChangeNodeLineWidthAction(node, 2);
 };
 
 /**

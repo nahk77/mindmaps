@@ -266,6 +266,11 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
       view.redrawNodeConnectors(node);
     });
 
+    eventBus.subscribe(mindmaps.Event.NODE_LINE_WIDTH_CHANGED, function(
+        node) {
+      view.redrawNodeConnectors(node);
+    });
+
     eventBus.subscribe(mindmaps.Event.NODE_CREATED, function(node) {
       view.createNode(node);
 
