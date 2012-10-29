@@ -226,7 +226,14 @@ mindmaps.Node.prototype.getDepth = function() {
 };
 
 mindmaps.Node.prototype.getLineWidthOffset = function() {
-  return this.lineWidthOffset;
+  var maxLineWidthOffsetOfDescendant = 0;
+  this.forEachDescendant(function(node) {
+    if (node.lineWidthOffset > maxLineWidthOffsetOfDescendant) {
+      maxLineWidthOffsetOfDescendant = node.lineWidthOffset;
+    }
+  });
+
+  return this.lineWidthOffset + maxLineWidthOffsetOfDescendant;
 }
 
 /**
