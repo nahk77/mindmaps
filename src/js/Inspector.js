@@ -27,6 +27,7 @@ mindmaps.InspectorView = function() {
       $boldCheckbox, $italicCheckbox, $underlineCheckbox,
       $linethroughCheckbox, $branchColorChildrenButton ];
   var $allColorpickers = [ branchColorPicker, fontColorPicker ];
+  var $notesTextArea = $("#inspector-notes-textarea", $content);
 
   /**
    * Returns a jquery object.
@@ -210,6 +211,10 @@ mindmaps.InspectorView = function() {
         self.branchColorChildrenButtonClicked();
       }
     });
+
+    $notesTextArea.bind('change keyup', function(changeEvent) {
+      self.notesTextAreaChanged($notesTextArea.val());
+    })
   };
 };
 
@@ -304,6 +309,12 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, view) {
   view.branchColorChildrenButtonClicked = function() {
     var action = new mindmaps.action.SetChildrenBranchColorAction(
         mindmapModel.selectedNode);
+    mindmapModel.executeAction(action);
+  }
+
+  view.notesTextAreaChanged = function(text) {
+    var action = new mindmaps.action.ChangeNotesAction(
+        mindmapModel.selectedNode, text);
     mindmapModel.executeAction(action);
   }
 

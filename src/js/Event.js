@@ -132,7 +132,13 @@ mindmaps.Event = {
    * @event
    * @param {String} message
    */
-  NOTIFICATION_ERROR: "NotificationErrorEvent"
+  NOTIFICATION_ERROR: "NotificationErrorEvent",
+
+  /**
+   * @event
+   * @param {String} message
+   */
+  NODE_NOTES_CHANGED: "NodeNotesChangedEvent"
 };
 
 /**
