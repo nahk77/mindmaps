@@ -76,6 +76,7 @@ mindmaps.Node.fromObject = function(obj) {
   var node = new mindmaps.Node();
   node.id = obj.id;
   node.text = obj.text;
+  node.notes = obj.notes;
   node.lineWidthOffset = obj.lineWidthOffset;
   node.offset = mindmaps.Point.fromObject(obj.offset);
   node.foldChildren = obj.foldChildren;
@@ -114,6 +115,7 @@ mindmaps.Node.prototype.toJSON = function() {
     // store parent as id since we have to avoid circular references
     parentId : this.parent ? this.parent.id : null,
     text : this.text,
+    notes : this.notes,
     lineWidthOffset : this.lineWidthOffset,
     offset : this.offset,
     foldChildren : this.foldChildren,
