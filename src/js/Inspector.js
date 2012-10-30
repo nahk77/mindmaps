@@ -109,6 +109,15 @@ mindmaps.InspectorView = function() {
   };
 
   /**
+   * Sets the contents of the notes text area.
+   * 
+   * @param {String} text
+   */
+  this.setNotesTextAreaContents = function(text) {
+    $notesTextArea.val(text)
+  };
+
+  /**
    * Initialise
    */
   this.init = function() {
@@ -365,6 +374,7 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, view) {
     view.setLinethroughCheckboxState(font.decoration === "line-through");
     view.setFontColorPickerColor(font.color);
     view.setBranchColorPickerColor(node.branchColor);
+    view.setNotesTextAreaContents(node.notes)
   }
 
   this.go = function() {
