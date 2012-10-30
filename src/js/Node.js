@@ -18,6 +18,7 @@ mindmaps.Node = function() {
       color : "#000000"
     }
   };
+  this.notes = "";
   this.lineWidthOffset = 0;
   this.offset = new mindmaps.Point();
   this.foldChildren = false;
