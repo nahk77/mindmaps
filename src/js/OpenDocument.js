@@ -151,7 +151,10 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
     //     view.showCloudError(msg);
     //   }
     // });
-    console.log("not implemented yet")
+
+    var doc = mindmaps.ServerStorage.loadDocument();
+    mindmapModel.setDocument(doc);
+    view.hideOpenDialog();
   };
 
   
