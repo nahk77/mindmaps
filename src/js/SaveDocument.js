@@ -67,6 +67,14 @@ mindmaps.SaveDocumentView = function() {
     append : true
   });
 
+  var $storageServerButton = $("#button-save-storageserver").button().click(
+    function() {
+      console.log("storageServerButton clicked")
+      // if (self.localStorageButtonClicked) {
+      //   self.localStorageButtonClicked();
+      // }
+    });
+
   this.setAutoSaveCheckboxState = function(checked) {
     $autoSaveCheckbox.prop("checked", checked);
   }
