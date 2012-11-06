@@ -89,6 +89,10 @@ mindmaps.SaveDocumentView = function() {
   this.showCloudError = function(msg) {
     $dialog.find('.cloud-error').text(msg);
   }
+
+  this.showStorageServerError = function(msg) {
+    $dialog.find('.storageserver-error').text(msg);
+  }
 };
 
 /**
@@ -155,7 +159,7 @@ mindmaps.SaveDocumentPresenter = function(eventBus, mindmapModel, view, autosave
         view.hideSaveDialog();
       },
       error: function() {
-        eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while saving to storage server");
+        view.showStorageServerError("Error while saving to storage server");
       }
     });
   };

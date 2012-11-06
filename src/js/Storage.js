@@ -175,7 +175,7 @@ mindmaps.ServerStorage = (function() {
       }).done(function() {
         callbacks.success();
       }).fail(function() {
-        callback.error();
+        callbacks.error();
       });
     },
 
