@@ -25,6 +25,12 @@ mindmaps.OpenDocumentView = function() {
     }
   });
 
+  var $openStorageServerButton = $("#button-open-storageserver").button().click(function() {
+    if (self.openStorageServerButtonClicked) {
+      self.openStorageServerButtonClicked();
+    }
+  });
+
   $dialog.find(".file-chooser input").bind("change", function(e) {
     if (self.openExernalFileClicked) {
       self.openExernalFileClicked(e);
@@ -127,6 +133,28 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
       }
     });
   };
+
+  /**
+   * Open file via storage server.
+   */
+  view.openStorageServerButtonClicked = function(e) {
+    // mindmaps.Util.trackEvent("Clicks", "cloud-open");
+
+    // filePicker.open({
+    //   load: function() {
+    //     view.showCloudLoading();
+    //   },
+    //   success: function() {
+    //     view.hideOpenDialog();
+    //   },
+    //   error: function(msg) {
+    //     view.showCloudError(msg);
+    //   }
+    // });
+    console.log("not implemented yet")
+  };
+
+  
 
   // http://www.w3.org/TR/FileAPI/#dfn-filereader
   /**
