@@ -151,34 +151,13 @@ mindmaps.LocalDocumentStorage = (function() {
  */
 mindmaps.ServerStorage = (function() {
   var data = null;
-  // var prefix = "mindmaps.document.";
-
-  // var getDocumentByKey = function(key) {
-  //   var json = localStorage.getItem(key);
-  //   if (json === null) {
-  //     return null;
-  //   }
-
-    /**
-     * Catch any SytaxErrors when document can't be parsed.
-     */
-  //   try {
-  //     return mindmaps.Document.fromJSON(json);
-  //   } catch (error) {
-  //     console.error("Error while loading document from local storage",
-  //         error);
-  //     return null;
-  //   }
-  // };
-
   /**
    * Public API
-   * @scope mindmaps.LocalDocumentStorage
+   * @scope mindmaps.ServerStorage
    */
   return {
     /**
-     * Saves a document to the localstorage. Overwrites the old document if
-     * one with the same id exists.
+     * Saves a document to the storage server via POST request.
      * 
      * @param {mindmaps.Document} doc
      * 
@@ -199,9 +178,7 @@ mindmaps.ServerStorage = (function() {
     },
 
     /**
-     * Loads a document from the local storage.
-     * 
-     * @param {String} docId
+     * Loads a document from the storage server.
      * 
      * @returns {mindmaps.Document} the document or null if not found.
      */
@@ -213,61 +190,6 @@ mindmaps.ServerStorage = (function() {
             error);
         return null;
       }
-    },
-
-    /**
-     * Finds all documents in the local storage object.
-     * 
-     * @returns {Array} an Array of documents
-     */
-    getDocuments : function() {
-      // var documents = [];
-      // // search localstorage for saved documents
-      // for ( var i = 0, max = localStorage.length; i < max; i++) {
-      //   var key = localStorage.key(i);
-      //   // value is a document if key confirms to prefix
-      //   if (key.indexOf(prefix) == 0) {
-      //     var doc = getDocumentByKey(key);
-      //     if (doc) {
-      //       documents.push(doc);
-      //     }
-      //   }
-      // }
-      // return documents;
-    },
-
-    /**
-     * Gets all document ids found in the local storage object.
-     * 
-     * @returns {Array} an Array of document ids
-     */
-    getDocumentIds : function() {
-      // var ids = [];
-      // // search localstorage for saved documents
-      // for ( var i = 0, max = localStorage.length; i < max; i++) {
-      //   var key = localStorage.key(i);
-      //   // value is a document if key confirms to prefix
-      //   if (key.indexOf(prefix) == 0) {
-      //     ids.push(key.substring(prefix.length));
-      //   }
-      // }
-      // return ids;
-    },
-
-    /**
-     * Deletes a document from the local storage.
-     * 
-     * @param {mindmaps.Document} doc
-     */
-    deleteDocument : function(doc) {
-      // localStorage.removeItem(prefix + doc.id);
-    },
-
-    /**
-     * Deletes all documents from the local storage.
-     */
-    deleteAllDocuments : function() {
-      // this.getDocuments().forEach(this.deleteDocument);
     }
   };
 })();
