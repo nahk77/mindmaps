@@ -237,15 +237,13 @@ mindmaps.MindMapModel = function(eventBus, commandRegistry, undoController) {
    * @returns {Boolean} whether the save was successful.
    */
   this.saveToStorageServer = function() {
-    // var doc = this.document.prepareSave();
-    // var success = mindmaps.LocalDocumentStorage.saveDocument(doc);
-    // if (success) {
-    //   eventBus.publish(mindmaps.Event.DOCUMENT_SAVED, doc);
-    // }
+    var doc = this.document.prepareSave();
+    var success = mindmaps.ServerStorage.saveDocument(doc);
+    if (success) {
+      eventBus.publish(mindmaps.Event.DOCUMENT_SAVED, doc);
+    }
 
-    // return success;
-    console.log("Not implemented yet.");
-    return true;
+    return success;
   }
 
   this.init();
