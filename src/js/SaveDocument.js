@@ -69,10 +69,9 @@ mindmaps.SaveDocumentView = function() {
 
   var $storageServerButton = $("#button-save-storageserver").button().click(
     function() {
-      console.log("storageServerButton clicked")
-      // if (self.localStorageButtonClicked) {
-      //   self.localStorageButtonClicked();
-      // }
+      if (self.storageServerButtonClicked) {
+        self.storageServerButtonClicked();
+      }
     });
 
   this.setAutoSaveCheckboxState = function(checked) {
@@ -135,6 +134,24 @@ mindmaps.SaveDocumentPresenter = function(eventBus, mindmapModel, view, autosave
       view.hideSaveDialog();
     } else {
       eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while saving to local storage");
+    }
+  };
+
+
+  /**
+  * View callback when storage server button was clicked. Saves the document
+  * to a storage server via XmlHttpRequest.
+  * 
+  * @ignore
+  */
+  view.storageServerButtonClicked = function() {
+    mindmaps.Util.trackEvent("Clicks", "storageserver-save");
+
+    var success = mindmapModel.saveToStorageServer();
+    if (success) {
+      view.hideSaveDialog();
+    } else {
+      eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while saving to storage server");
     }
   };
 
