@@ -163,18 +163,20 @@ mindmaps.ServerStorage = (function() {
      * 
      * @returns {Boolean} true if save was successful, false otherwise.
      */
-    saveDocument : function(doc) {
-      // try {
-      //   localStorage.setItem(prefix + doc.id, doc.serialize());
-      //   return true;
-      // } catch (error) {
-      //   // QUOTA_EXCEEDED
-      //   console.error("Error while saving document to local storage",
-      //       error);
-      //   return false;
-      // }
-      data = doc.serialize();
-      return true
+    saveDocument : function(doc, callbacks) {
+      data = doc.serialize(); // TODO: Remove after testing.
+
+      callbacks.start()
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/",
+        data: { data: doc.serialize() }
+      }).done(function() {
+        callbacks.success()
+      }).fail(function() {
+        callback.error()
+      });
     },
 
     /**

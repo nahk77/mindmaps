@@ -147,12 +147,17 @@ mindmaps.SaveDocumentPresenter = function(eventBus, mindmapModel, view, autosave
   view.storageServerButtonClicked = function() {
     mindmaps.Util.trackEvent("Clicks", "storageserver-save");
 
-    var success = mindmapModel.saveToStorageServer();
-    if (success) {
-      view.hideSaveDialog();
-    } else {
-      eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while saving to storage server");
-    }
+    mindmapModel.saveToStorageServer({
+      start: function() {
+
+      },
+      success: function() {
+        view.hideSaveDialog();
+      },
+      error: function() {
+        eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while saving to storage server");
+      }
+    });
   };
 
 
