@@ -101,6 +101,20 @@ mindmaps.OpenDocumentView = function() {
   this.hideCloudLoading = function() {
     $dialog.find('.cloud-loading').removeClass('loading');
   };
+
+  this.showStorageServerError = function(msg) {
+    $dialog.find('.storageserver-loading').removeClass('loading');
+    $dialog.find('.storageserver-error').text(msg);
+  };
+
+  this.showStorageServerLoading = function() {
+    $dialog.find('.storageserver-error').text('');
+    $dialog.find('.storageserver-loading').addClass('loading');
+  };
+
+  this.hideStorageServerLoading = function() {
+    $dialog.find('.storageserver-loading').removeClass('loading');
+  };
 };
 
 /**
@@ -140,21 +154,9 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
   view.openStorageServerButtonClicked = function(e) {
     mindmaps.Util.trackEvent("Clicks", "storageserver-open");
 
-    // filePicker.open({
-    //   load: function() {
-    //     view.showCloudLoading();
-    //   },
-    //   success: function() {
-    //     view.hideOpenDialog();
-    //   },
-    //   error: function(msg) {
-    //     view.showCloudError(msg);
-    //   }
-    // });
-
     var doc = mindmaps.ServerStorage.loadDocument({
       start: function() {
-
+        view.showStorageServerLoading();
       },
       success: function(doc) {
         mindmapModel.setDocument(doc);
