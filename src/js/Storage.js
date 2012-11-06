@@ -169,7 +169,7 @@ mindmaps.ServerStorage = (function() {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/",
+        url: mindmaps.Config.serverStorageUrl,
         data: { data: doc.serialize() }
       }).done(function() {
         callbacks.success();
@@ -188,7 +188,7 @@ mindmaps.ServerStorage = (function() {
 
       $.ajax({
         type: "GET",
-        url: "http://localhost:3000/"
+        url: mindmaps.Config.serverStorageUrl
       }).done(function(json) {
         var doc = mindmaps.Document.fromJSON(json);
         callbacks.success(doc);
