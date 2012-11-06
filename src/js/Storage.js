@@ -150,7 +150,6 @@ mindmaps.LocalDocumentStorage = (function() {
  * @namespace
  */
 mindmaps.ServerStorage = (function() {
-  var data = null;
   /**
    * Public API
    * @scope mindmaps.ServerStorage
