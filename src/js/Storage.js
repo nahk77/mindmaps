@@ -150,6 +150,7 @@ mindmaps.LocalDocumentStorage = (function() {
  * @namespace
  */
 mindmaps.ServerStorage = (function() {
+  var data = null;
   // var prefix = "mindmaps.document.";
 
   // var getDocumentByKey = function(key) {
@@ -193,6 +194,7 @@ mindmaps.ServerStorage = (function() {
       //       error);
       //   return false;
       // }
+      data = doc.serialize();
       return true
     },
 
@@ -203,8 +205,14 @@ mindmaps.ServerStorage = (function() {
      * 
      * @returns {mindmaps.Document} the document or null if not found.
      */
-    loadDocument : function(docId) {
-      // return getDocumentByKey(prefix + docId);
+    loadDocument : function() {
+      try {
+        return mindmaps.Document.fromJSON(data);
+      } catch (error) {
+        console.error("Error while loading document from storage server",
+            error);
+        return null;
+      }
     },
 
     /**
