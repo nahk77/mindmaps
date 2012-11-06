@@ -163,7 +163,8 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
         view.hideOpenDialog();
       },
       error: function() {
-        eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while loading from storage server.");
+        var msg = "Error while loading from storage server.";
+        view.showStorageServerError(msg);
       }
     });
     

@@ -194,7 +194,7 @@ mindmaps.ServerStorage = (function() {
         var doc = mindmaps.Document.fromJSON(json);
         callbacks.success(doc);
       }).fail(function() {
-        callback.error();
+        callbacks.error();
       });
     }
   };
