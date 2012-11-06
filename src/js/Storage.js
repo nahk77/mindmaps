@@ -166,16 +166,16 @@ mindmaps.ServerStorage = (function() {
     saveDocument : function(doc, callbacks) {
       data = doc.serialize(); // TODO: Remove after testing.
 
-      callbacks.start()
+      callbacks.start();
 
       $.ajax({
         type: "POST",
         url: "http://localhost:3000/",
         data: { data: doc.serialize() }
       }).done(function() {
-        callbacks.success()
+        callbacks.success();
       }).fail(function() {
-        callback.error()
+        callback.error();
       });
     },
 
@@ -184,14 +184,18 @@ mindmaps.ServerStorage = (function() {
      * 
      * @returns {mindmaps.Document} the document or null if not found.
      */
-    loadDocument : function() {
-      try {
-        return mindmaps.Document.fromJSON(data);
-      } catch (error) {
-        console.error("Error while loading document from storage server",
-            error);
-        return null;
-      }
+    loadDocument : function(callbacks) {
+      callbacks.start();
+
+      $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/"
+      }).done(function(json) {
+        var doc = mindmaps.Document.fromJSON(json);
+        callbacks.success(doc);
+      }).fail(function() {
+        callback.error();
+      });
     }
   };
 })();

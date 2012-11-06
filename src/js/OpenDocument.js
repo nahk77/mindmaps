@@ -138,7 +138,7 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
    * Open file via storage server.
    */
   view.openStorageServerButtonClicked = function(e) {
-    // mindmaps.Util.trackEvent("Clicks", "cloud-open");
+    mindmaps.Util.trackEvent("Clicks", "storageserver-open");
 
     // filePicker.open({
     //   load: function() {
@@ -152,9 +152,19 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
     //   }
     // });
 
-    var doc = mindmaps.ServerStorage.loadDocument();
-    mindmapModel.setDocument(doc);
-    view.hideOpenDialog();
+    var doc = mindmaps.ServerStorage.loadDocument({
+      start: function() {
+
+      },
+      success: function(doc) {
+        mindmapModel.setDocument(doc);
+        view.hideOpenDialog();
+      },
+      error: function() {
+        eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, "Error while loading from storage server.");
+      }
+    });
+    
   };
 
   
