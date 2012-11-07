@@ -67,6 +67,13 @@ mindmaps.ApplicationController = function() {
   }
 
   /**
+   * Handles the edit URLs command.
+   */
+  function doEditURLs() {
+    console.log("Supposed to open the URL dialog now...")
+  }
+
+  /**
    * Initializes the controller, registers for all commands and subscribes to
    * event bus.
    */
@@ -91,6 +98,10 @@ mindmaps.ApplicationController = function() {
 
     var exportCommand = commandRegistry.get(mindmaps.ExportCommand);
     exportCommand.setHandler(doExportDocument);
+
+    var editURLsCommand = commandRegistry
+        .get(mindmaps.EditURLsCommand);
+    editURLsCommand.setHandler(doEditURLs);
 
     eventBus.subscribe(mindmaps.Event.DOCUMENT_CLOSED, function() {
       saveDocumentCommand.setEnabled(false);
