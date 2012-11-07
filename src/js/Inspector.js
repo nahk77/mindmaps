@@ -21,11 +21,12 @@ mindmaps.InspectorView = function() {
       $content);
   var $branchColorChildrenButton = $("#inspector-button-branch-color-children", $content);
   var branchColorPicker = $("#inspector-branch-color-picker", $content);
+  var $openURLDialogButton = $("#inspector-button-urls", $content);
   var fontColorPicker = $("#inspector-font-color-picker", $content);
   var $allButtons = [ $sizeDecreaseButton, $sizeIncreaseButton,
       $lineWidthDecreaseButton, $lineWidthIncreaseButton,
       $boldCheckbox, $italicCheckbox, $underlineCheckbox,
-      $linethroughCheckbox, $branchColorChildrenButton ];
+      $linethroughCheckbox, $branchColorChildrenButton, $openURLDialogButton ];
   var $allColorpickers = [ branchColorPicker, fontColorPicker ];
   var $notesTextArea = $("#inspector-notes-textarea", $content);
 
@@ -123,6 +124,7 @@ mindmaps.InspectorView = function() {
   this.init = function() {
     $(".buttonset", $content).buttonset();
     $branchColorChildrenButton.button();
+    $openURLDialogButton.button();
 
     $sizeDecreaseButton.click(function() {
       if (self.fontSizeDecreaseButtonClicked) {
