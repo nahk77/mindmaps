@@ -9,7 +9,12 @@ mindmaps.CanvasDrawingUtil = {
     // var width = this.zoomFactor * (10 - depth);
     var width = zoomFactor * (12 - depth * 2);
 
-    width += $node.data().node.getLineWidthOffset();
+    var offset = 0
+    if ($node.data().node !== undefined) {
+      offset = $node.data().node.getLineWidthOffset();
+    }
+
+    width += offset
 
     if (width < 2) {
       width = 2;
