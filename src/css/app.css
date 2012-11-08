@@ -261,6 +261,10 @@ html,body {
   border-color: blue;
 }
 
+.mindmap .node-urls {
+  font-size: 70%;
+}
+
 .mindmap .button-fold {
   width: 16px;
   height: 16px;

@@ -177,6 +177,10 @@ mindmaps.DefaultCanvasView = function() {
     return $("#node-caption-" + node.id);
   }
 
+  function $getNodeUrls(node) {
+    return $("#node-urls-" + node.id);
+  }
+
   function drawLineCanvas($canvas, depth, offsetX, offsetY, $node, $parent,
       color) {
     var canvas = $canvas[0];
@@ -403,6 +407,17 @@ mindmaps.DefaultCanvasView = function() {
 
     var metrics = textMetrics.getTextMetrics(node, this.zoomFactor);
     $text.css(metrics);
+
+    // node url
+    var $url = $("<div/>", {
+      id : "node-urls-" + node.id,
+      "class" : "node-urls"
+    }).css({
+      "position": "absolute",
+      "top" : 0,
+      "left" : $node.width() * 1.05,
+      "z-index" : 100
+    }).appendTo($node);
 
     // create fold button for parent if he hasn't one already
     var parentAlreadyHasFoldButton = $parent.data("foldButton");
@@ -656,6 +671,7 @@ mindmaps.DefaultCanvasView = function() {
   this.updateNode = function(node) {
     var $node = $getNode(node);
     var $text = $getNodeCaption(node);
+    var $urls = $getNodeUrls(node);
     var font = node.text.font;
 
     var lineWidth = this.getLineWidth($node, node.getDepth())
@@ -674,6 +690,13 @@ mindmaps.DefaultCanvasView = function() {
       "font-style" : font.style,
       "text-decoration" : font.decoration
     }).css(metrics);
+
+    if (node.url !== null) {
+      $urls.html('<a href="' +node.url+ '" target="_blank">1</a>')
+    }
+    $urls.css({
+      "left": $node.width() * 1.05
+    });
 
     this.redrawNodeConnectors(node);
   };
