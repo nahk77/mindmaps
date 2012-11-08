@@ -21,6 +21,7 @@ mindmaps.InspectorView = function() {
       $content);
   var $branchColorChildrenButton = $("#inspector-button-branch-color-children", $content);
   var branchColorPicker = $("#inspector-branch-color-picker", $content);
+  var $openURLDialogTableRow = $("#inspector-urls-row", $content);
   var $openURLDialogButton = $("#inspector-button-urls", $content);
   var fontColorPicker = $("#inspector-font-color-picker", $content);
   var $allButtons = [ $sizeDecreaseButton, $sizeIncreaseButton,
@@ -223,6 +224,14 @@ mindmaps.InspectorView = function() {
       }
     });
 
+    if (!mindmaps.Config.activateDirectUrlInput
+      && !mindmaps.Config.activateDirectUrlInput
+      && !mindmaps.Config.activateDirectUrlInput) {
+
+      $openURLDialogTableRow.css({
+        "display": "none"
+      })
+    }
     $openURLDialogButton.click(function() {
       if (self.openURLDialogButtonClicked) {
         self.openURLDialogButtonClicked();
