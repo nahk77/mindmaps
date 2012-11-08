@@ -138,6 +138,12 @@ mindmaps.Event = {
    * @event
    * @param {String} message
    */
+  NODE_URLS_CHANGED: "NodeURLsChangedEvent",
+
+  /**
+   * @event
+   * @param {String} message
+   */
   NODE_NOTES_CHANGED: "NodeNotesChangedEvent"
 };
 

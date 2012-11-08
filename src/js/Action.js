@@ -453,6 +453,18 @@ mindmaps.action.SetChildrenBranchColorAction = function(node) {
 mindmaps.action.SetChildrenBranchColorAction.prototype = new mindmaps.action.CompositeAction();
 
 /**
+* Changes the URLs of a node.
+*/
+
+mindmaps.action.ChangeURLsAction = function(node, url) {
+  this.execute = function() {
+    node.url = url;
+  };
+
+  this.event = [ mindmaps.Event.NODE_URLS_CHANGED, node ];
+}
+
+/**
 * Changes a node's note.
 */
 
