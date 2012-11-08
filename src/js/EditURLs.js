@@ -48,6 +48,11 @@ mindmaps.EditURLsView = function() {
     }
   })
 
+  $directInputUrlListBody.delegate("a.delete", "click", function() {
+    var t = $(this).tmplItem();
+    self.urlRemoved(t.data.url);
+  });
+
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
       $directInputUrlListBody.empty();
@@ -106,6 +111,12 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
 
   view.urlAdded = function(url) {
     var action = new mindmaps.action.AddURLsAction(
+        mindmapModel.selectedNode, url);
+    mindmapModel.executeAction(action);
+  }
+
+  view.urlRemoved = function(url) {
+    var action = new mindmaps.action.RemoveURLsAction(
         mindmapModel.selectedNode, url);
     mindmapModel.executeAction(action);
   }

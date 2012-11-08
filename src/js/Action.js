@@ -477,6 +477,20 @@ mindmaps.action.AddURLsAction = function(node, url) {
 }
 
 /**
+* Removes a URL from a note.
+*/
+
+mindmaps.action.RemoveURLsAction = function(node, urlToRemove) {
+  this.execute = function() {
+    node.urls = node.urls.filter(function(url) {
+      return url !== urlToRemove;
+    })
+  };
+
+  this.event = [ mindmaps.Event.NODE_URLS_REMOVED, node ];
+}
+
+/**
 * Changes a node's note.
 */
 
