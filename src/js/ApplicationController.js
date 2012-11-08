@@ -70,7 +70,9 @@ mindmaps.ApplicationController = function() {
    * Handles the edit URLs command.
    */
   function doEditURLs() {
-    console.log("Supposed to open the URL dialog now...")
+    var presenter = new mindmaps.EditURLsPresenter(eventBus,
+        mindmapModel, new mindmaps.EditURLsView());
+    presenter.go();
   }
 
   /**
