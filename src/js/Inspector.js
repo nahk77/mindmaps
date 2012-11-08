@@ -238,7 +238,7 @@ mindmaps.InspectorView = function() {
  * @param {mindmaps.MindMapModel} mindmapModel
  * @param {mindmaps.InspectorView} view
  */
-mindmaps.InspectorPresenter = function(eventBus, mindmapModel, view) {
+mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, view) {
   var self = this;
 
   /**

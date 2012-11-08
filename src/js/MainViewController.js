@@ -153,7 +153,7 @@ mindmaps.MainViewController = function(eventBus, mindmapModel, commandRegistry) 
     // inspector
     var inspectorView = new mindmaps.InspectorView();
     var inspectorPresenter = new mindmaps.InspectorPresenter(eventBus,
-        mindmapModel, inspectorView);
+        mindmapModel, commandRegistry, inspectorView);
     inspectorPresenter.go();
 
     var inspectorPanel = fpf
