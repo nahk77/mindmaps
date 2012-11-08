@@ -38,10 +38,6 @@ mindmaps.EditURLsView = function() {
           $("#template-urls-table-item").tmpl({
             "url": url
           }).appendTo($directInputUrlListBody);
-          // $directInputUrlListBody.append('<tr>'
-          //   + '<td>' +url+ '</td>'
-          //   + '<td id=""> </td>'
-          //   + '</tr>');
         });
       }
     }
