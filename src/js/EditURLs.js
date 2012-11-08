@@ -41,6 +41,13 @@ mindmaps.EditURLsView = function() {
     $directInputMultiUrlInput.val("");
   })
 
+  $directInputMultiUrlInput.keypress(function(e) {
+    if (e.which === 13) {
+      self.urlAdded($directInputMultiUrlInput.val());
+      $directInputMultiUrlInput.val("");
+    }
+  })
+
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
       $directInputUrlListBody.empty();
