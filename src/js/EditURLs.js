@@ -26,12 +26,20 @@ mindmaps.EditURLsView = function() {
 
   var $directInputMultiUrlUi = $("#template-urls-multi-url-ui").tmpl();
 
-  var $directInputUrlList = $directInputMultiUrlUi.find(".url-list");
-  var $directInputUrlListBody = $directInputMultiUrlUi.find(".url-list tbody");
+  var $directInputMultiUrlInput = $directInputMultiUrlUi.find("input");
+  var $directInputMultiUrlButton = $directInputMultiUrlUi.find("button");
 
-  $directInputSingleUrlInput.bind("change keyup", function(changeEvent) {
-    self.urlChanged($directInputSingleUrlInput.val());
+  var $directInputUrlList = $directInputMultiUrlUi.find(".url-list");
+  var $directInputUrlListBody = $directInputUrlList.find("tbody");
+
+  $directInputSingleUrlInput.bind("change keyup", function() {
+    self.singleUrlChanged($directInputSingleUrlInput.val());
   });
+
+  $directInputMultiUrlButton.click(function(){
+    self.urlAdded($directInputMultiUrlInput.val());
+    $directInputMultiUrlInput.val("");
+  })
 
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
@@ -82,8 +90,14 @@ mindmaps.EditURLsView = function() {
 * @param {mindmaps.EditURLsView} view
 */
 mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
-  view.urlChanged = function(url) {
+  view.singleUrlChanged = function(url) {
     var action = new mindmaps.action.ChangeURLsAction(
+        mindmapModel.selectedNode, url);
+    mindmapModel.executeAction(action);
+  }
+
+  view.urlAdded = function(url) {
+    var action = new mindmaps.action.AddURLsAction(
         mindmapModel.selectedNode, url);
     mindmapModel.executeAction(action);
   }

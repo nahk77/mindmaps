@@ -465,6 +465,18 @@ mindmaps.action.ChangeURLsAction = function(node, url) {
 }
 
 /**
+* Adds a URL to a note.
+*/
+
+mindmaps.action.AddURLsAction = function(node, url) {
+  this.execute = function() {
+    node.urls.push(url);
+  };
+
+  this.event = [ mindmaps.Event.NODE_URLS_ADDED, node ];
+}
+
+/**
 * Changes a node's note.
 */
 
