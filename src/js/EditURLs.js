@@ -43,7 +43,8 @@ mindmaps.EditURLsView = function() {
 
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
-      console.log(urls.length)
+      $directInputUrlListBody.empty();
+
       if (urls.length === 0) {
         $directInputUrlListBody.append("<tr><td>No URLs added yet.</td></tr>");
       }
@@ -101,6 +102,10 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
         mindmapModel.selectedNode, url);
     mindmapModel.executeAction(action);
   }
+
+  eventBus.subscribe(mindmaps.Event.NODE_URLS_ADDED, function(node) {
+    view.setUrls(mindmapModel.selectedNode.urls);
+  });
 
   this.go = function() {
     view.setUrls(mindmapModel.selectedNode.urls)
