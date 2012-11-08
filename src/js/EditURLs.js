@@ -19,6 +19,7 @@ mindmaps.EditURLsView = function() {
     }
   });
 
+  var $urlsTextFieldDiv = $("#urls-text-field");
   var $urlTextInput = $("#url-text-input");
 
   $urlTextInput.bind("change keyup", function(changeEvent) {
@@ -30,6 +31,12 @@ mindmaps.EditURLsView = function() {
   }
 
   this.showDialog = function() {
+    if (!mindmaps.Config.activateDirectUrlInput) {
+      $urlsTextFieldDiv.css({
+        "display": "none"
+      });
+    }
+
     $dialog.dialog("open");
   };
 };
