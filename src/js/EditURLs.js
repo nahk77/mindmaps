@@ -124,6 +124,10 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
   eventBus.subscribe(mindmaps.Event.NODE_URLS_ADDED, function(node) {
     view.setUrls(mindmapModel.selectedNode.urls);
   });
+  
+  eventBus.subscribe(mindmaps.Event.NODE_URLS_REMOVED, function(node) {
+    view.setUrls(mindmapModel.selectedNode.urls);
+  });
 
   this.go = function() {
     view.setUrls(mindmapModel.selectedNode.urls)

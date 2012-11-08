@@ -281,6 +281,10 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
       view.updateNode(node);
     });
 
+    eventBus.subscribe(mindmaps.Event.NODE_URLS_REMOVED, function(node) {
+      view.updateNode(node);
+    });
+
     eventBus.subscribe(mindmaps.Event.NODE_LINE_WIDTH_CHANGED, function(
         node) {
       var currentNode = node;
