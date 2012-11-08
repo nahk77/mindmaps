@@ -458,7 +458,7 @@ mindmaps.action.SetChildrenBranchColorAction.prototype = new mindmaps.action.Com
 
 mindmaps.action.ChangeURLsAction = function(node, url) {
   this.execute = function() {
-    node.url = url;
+    node.url = [ url ];
   };
 
   this.event = [ mindmaps.Event.NODE_URLS_CHANGED, node ];

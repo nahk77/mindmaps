@@ -18,7 +18,7 @@ mindmaps.Node = function() {
       color : "#000000"
     }
   };
-  this.url = null;
+  this.url = [];
   this.notes = "";
   this.lineWidthOffset = 0;
   this.offset = new mindmaps.Point();

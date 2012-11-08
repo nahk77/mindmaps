@@ -692,7 +692,7 @@ mindmaps.DefaultCanvasView = function() {
     }).css(metrics);
 
     if (node.url !== null) {
-      $urls.html('<a href="' +node.url+ '" target="_blank">1</a>')
+      $urls.html('<a href="' +node.url[0]+ '" target="_blank">1</a>')
     }
     $urls.css({
       "left": $node.width() * 1.05
