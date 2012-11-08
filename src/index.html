@@ -117,20 +117,30 @@
 </tr>
 </script>
 
+<script id="template-urls-single-url-ui" type="text/x-jquery-tmpl">
+<p>URL: <input type="text"></p>
+</script>
+
+<script id="template-urls-multi-url-ui" type="text/x-jquery-tmpl">
+<div>
+  <p><input type"text"><button>Add</button></p>
+  <table class="url-list">
+    <thead>
+      <tr>
+        <th class="title">URL</th>
+        <th class="delete"></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+</script>
+
 <script id="template-urls" type="text/x-jquery-tmpl">
 <div id="urls-dialog" class="file-dialog" title="Edit node URLs">
   <div id="urls-text-field">
     <h1>Edit node URL</h1>
-    <p>URL: <input type="text" id="url-text-input"></p>
-    <table class="url-list">
-      <thead>
-        <tr>
-          <th class="title">URL</th>
-          <th class="delete"></th>
-        </tr>
-      </thead>
-      <tbody class="url-list-body"></tbody>
-    </table>
   </div>
 </div>
 </script>

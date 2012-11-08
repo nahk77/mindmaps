@@ -19,17 +19,23 @@ mindmaps.EditURLsView = function() {
     }
   });
 
-  var $urlsTextFieldDiv = $("#urls-text-field");
-  var $urlTextInput = $("#url-text-input");
-  var $directInputUrlList = $("#urls-text-field .url-list");
-  var $directInputUrlListBody = $("#urls-text-field .url-list .url-list-body");
+  var $directInputDiv = $("#urls-text-field");
 
-  $urlTextInput.bind("change keyup", function(changeEvent) {
-    self.urlChanged($urlTextInput.val());
+  var $directInputSingleUrlUi = $("#template-urls-single-url-ui").tmpl();
+  var $directInputSingleUrlInput = $directInputSingleUrlUi.find("input");
+
+  var $directInputMultiUrlUi = $("#template-urls-multi-url-ui").tmpl();
+
+  var $directInputUrlList = $directInputMultiUrlUi.find(".url-list");
+  var $directInputUrlListBody = $directInputMultiUrlUi.find(".url-list tbody");
+
+  $directInputSingleUrlInput.bind("change keyup", function(changeEvent) {
+    self.urlChanged($directInputSingleUrlInput.val());
   });
 
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
+      console.log(urls.length)
       if (urls.length === 0) {
         $directInputUrlListBody.append("<tr><td>No URLs added yet.</td></tr>");
       }
@@ -42,23 +48,21 @@ mindmaps.EditURLsView = function() {
       }
     }
     else {
-      $urlTextInput.val(urls[0]);
+      $directInputSingleUrlInput.val(urls[0]);
     }
   }
 
   this.showDialog = function() {
     if (mindmaps.Config.activateDirectUrlInput) {
       if (mindmaps.Config.allowMultipleUrls) {
-        // ...
+        $directInputDiv.append($directInputMultiUrlUi);
       }
       else {
-        $directInputUrlList.css({
-          "display": "none"
-        });
+        $directInputDiv.append($directInputSingleUrlUi);
       }
     }
     else {
-      $urlsTextFieldDiv.css({
+      $directInputDiv.css({
         "display": "none"
       });
     }
