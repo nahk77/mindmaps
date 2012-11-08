@@ -691,8 +691,19 @@ mindmaps.DefaultCanvasView = function() {
       "text-decoration" : font.decoration
     }).css(metrics);
 
-    if (node.url !== null) {
-      $urls.html('<a href="' +node.urls[0]+ '" target="_blank">1</a>')
+    $urls.empty();
+    var i = 0;
+    while (i < node.urls.length) {
+      var url = node.urls[i];
+
+      var $link = $('<a href="' +url+ '" target="_blank">' +(i + 1)+ '</a>')
+
+      $urls.append($link);
+      if ( i + 1 < node.urls.length) {
+        $urls.append(", ");
+      }
+
+      i += 1;
     }
     $urls.css({
       "left": $node.width() * 1.05
