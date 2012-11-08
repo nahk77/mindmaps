@@ -15,7 +15,7 @@ mindmaps.Config = (function() {
     activateUrlsFromServerWithoutSearch: true,
     activateUrlsFromServerWithSearch: true,
 
-    allowMultipleUrls: false,
+    allowMultipleUrls: true,
 
     urlServerAddress: "http://localhost:3001/"
   };

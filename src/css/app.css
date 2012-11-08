@@ -593,6 +593,46 @@ html,body {
   display: inline;
 }
 
+.file-dialog .url-list {
+  width: 100%;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.file-dialog .url-list thead {
+  font-weight: bold;
+  text-align: left;
+}
+
+.file-dialog .url-list th {
+  padding-bottom: 4px;
+}
+
+.file-dialog .url-list th.title {
+  width: 50%;
+}
+
+.file-dialog .url-list tbody td {
+  padding: 4px;
+}
+
+.file-dialog .url-list tbody tr:nth-child(odd) {
+  background-color: #E8E8E8;
+}
+
+.file-dialog .url-list tbody tr:hover,.file-dialog .localstorage-filelist tbody tr:nth-child(odd):hover
+  {
+  background-color: #B9E0F5;
+}
+
+.file-dialog .url-list a.delete {
+  display: none;
+}
+
+.file-dialog .url-list tr:hover a.delete {
+  display: inline;
+}
+
 .file-dialog .autosave {
   margin-left: 20px;
 }

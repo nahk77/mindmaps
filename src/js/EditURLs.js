@@ -21,21 +21,52 @@ mindmaps.EditURLsView = function() {
 
   var $urlsTextFieldDiv = $("#urls-text-field");
   var $urlTextInput = $("#url-text-input");
+  var $directInputUrlList = $("#urls-text-field .url-list");
+  var $directInputUrlListBody = $("#urls-text-field .url-list .url-list-body");
 
   $urlTextInput.bind("change keyup", function(changeEvent) {
     self.urlChanged($urlTextInput.val());
   });
 
-  this.setURLTextInput = function(url) {
-    $urlTextInput.val(url);
+  this.setUrls = function(urls) {
+    if (mindmaps.Config.allowMultipleUrls) {
+      if (urls.length === 0) {
+        $directInputUrlListBody.append("<tr><td>No URLs added yet.</td></tr>");
+      }
+      else {
+        urls.forEach(function(url) {
+          $("#template-urls-table-item").tmpl({
+            "url": url
+          }).appendTo($directInputUrlListBody);
+          // $directInputUrlListBody.append('<tr>'
+          //   + '<td>' +url+ '</td>'
+          //   + '<td id=""> </td>'
+          //   + '</tr>');
+        });
+      }
+    }
+    else {
+      $urlTextInput.val(urls[0]);
+    }
   }
 
   this.showDialog = function() {
-    if (!mindmaps.Config.activateDirectUrlInput) {
+    if (mindmaps.Config.activateDirectUrlInput) {
+      if (mindmaps.Config.allowMultipleUrls) {
+        // ...
+      }
+      else {
+        $directInputUrlList.css({
+          "display": "none"
+        });
+      }
+    }
+    else {
       $urlsTextFieldDiv.css({
         "display": "none"
       });
     }
+
 
     $dialog.dialog("open");
   };
@@ -58,7 +89,7 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
   }
 
   this.go = function() {
-    view.setURLTextInput(mindmapModel.selectedNode.url)
+    view.setUrls(mindmapModel.selectedNode.urls)
     view.showDialog();
   };
 };

@@ -110,11 +110,27 @@
 </div>
 </script>
 
+<script id="template-urls-table-item" type="text/x-jquery-tmpl">
+<tr>
+  <td><a class="url" href="#">${url}</a></td>
+  <td><a class="delete" href="#">delete</a></td>
+</tr>
+</script>
+
 <script id="template-urls" type="text/x-jquery-tmpl">
 <div id="urls-dialog" class="file-dialog" title="Edit node URLs">
   <div id="urls-text-field">
     <h1>Edit node URL</h1>
     <p>URL: <input type="text" id="url-text-input"></p>
+    <table class="url-list">
+      <thead>
+        <tr>
+          <th class="title">URL</th>
+          <th class="delete"></th>
+        </tr>
+      </thead>
+      <tbody class="url-list-body"></tbody>
+    </table>
   </div>
 </div>
 </script>
