@@ -19,6 +19,16 @@ mindmaps.EditURLsView = function() {
     }
   });
 
+  var $urlTextInput = $("#url-text-input");
+
+  $urlTextInput.bind("change keyup", function(changeEvent) {
+    self.urlChanged($urlTextInput.val());
+  });
+
+  this.setURLTextInput = function(url) {
+    $urlTextInput.val(url);
+  }
+
   this.showDialog = function() {
     $dialog.dialog("open");
   };
@@ -34,7 +44,14 @@ mindmaps.EditURLsView = function() {
 * @param {mindmaps.EditURLsView} view
 */
 mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
+  view.urlChanged = function(url) {
+    var action = new mindmaps.action.ChangeURLsAction(
+        mindmapModel.selectedNode, url);
+    mindmapModel.executeAction(action);
+  }
+
   this.go = function() {
+    view.setURLTextInput(mindmapModel.selectedNode.url)
     view.showDialog();
   };
 };
