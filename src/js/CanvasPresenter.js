@@ -231,6 +231,13 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
     view.center();
 
     mindmapModel.selectNode(map.root);
+
+    view.updateNode(map.root);
+    map.root.forEachDescendant(function(node) {
+      // No, passing updateNode directly as an argument won't work because it
+      // messes with "this".
+      view.updateNode(node);
+    });
   }
 
   /**
