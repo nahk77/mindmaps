@@ -225,8 +225,8 @@ mindmaps.InspectorView = function() {
     });
 
     if (!mindmaps.Config.activateDirectUrlInput
-      && !mindmaps.Config.activateDirectUrlInput
-      && !mindmaps.Config.activateDirectUrlInput) {
+      && !mindmaps.Config.activateUrlsFromServerWithoutSearch
+      && !mindmaps.Config.activateUrlsFromServerWithSearch) {
 
       $openURLDialogTableRow.css({
         "display": "none"
