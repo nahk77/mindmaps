@@ -18,6 +18,7 @@ mindmaps.Node = function() {
       color : "#000000"
     }
   };
+  this.url = null;
   this.notes = "";
   this.lineWidthOffset = 0;
   this.offset = new mindmaps.Point();
@@ -76,6 +77,7 @@ mindmaps.Node.fromObject = function(obj) {
   var node = new mindmaps.Node();
   node.id = obj.id;
   node.text = obj.text;
+  node.url = obj.url;
   node.notes = obj.notes;
   node.lineWidthOffset = obj.lineWidthOffset;
   node.offset = mindmaps.Point.fromObject(obj.offset);
@@ -115,6 +117,7 @@ mindmaps.Node.prototype.toJSON = function() {
     // store parent as id since we have to avoid circular references
     parentId : this.parent ? this.parent.id : null,
     text : this.text,
+    url : this.url,
     notes : this.notes,
     lineWidthOffset : this.lineWidthOffset,
     offset : this.offset,
