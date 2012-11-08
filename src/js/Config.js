@@ -8,6 +8,15 @@ mindmaps.Config = (function() {
    */
   return {
     // The URL of the storage server used in ServerStorage.
-    serverStorageUrl: "http://localhost:3000/"
+    serverStorageUrl: "http://localhost:3000/",
+
+    // Configuration for node URLs.
+    activateDirectUrlInput: true,
+    activateUrlsFromServerWithoutSearch: true,
+    activateUrlsFromServerWithSearch: true,
+
+    allowMultipleUrls: false,
+
+    urlServerAddress: "http://localhost:3001/"
   };
 })();
