@@ -223,6 +223,12 @@ mindmaps.InspectorView = function() {
       }
     });
 
+    $openURLDialogButton.click(function() {
+      if (self.openURLDialogButtonClicked) {
+        self.openURLDialogButtonClicked();
+      }
+    });
+
     $notesTextArea.bind('change keyup', function(changeEvent) {
       self.notesTextAreaChanged($notesTextArea.val());
     })
@@ -321,6 +327,11 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, 
     var action = new mindmaps.action.SetChildrenBranchColorAction(
         mindmapModel.selectedNode);
     mindmapModel.executeAction(action);
+  }
+
+  view.openURLDialogButtonClicked = function() {
+    var command = commandRegistry.get(mindmaps.EditURLsCommand);
+    command.execute();
   }
 
   view.notesTextAreaChanged = function(text) {
