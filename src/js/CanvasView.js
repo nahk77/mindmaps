@@ -692,21 +692,27 @@ mindmaps.DefaultCanvasView = function() {
     }).css(metrics);
 
     $urls.empty();
+
     var i = 0;
+    var linkString = '<p>';
     while (i < node.urls.length) {
       var url = node.urls[i];
 
-      var $link = $('<a href="' +url+ '" target="_blank">' +(i + 1)+ '</a>')
+      linkString += '<a href="' +url+ '" target="_blank">' +(i + 1)+ '</a>';
 
-      $urls.append($link);
       if ( i + 1 < node.urls.length) {
-        $urls.append(", ");
+        linkString += ", ";
       }
 
       i += 1;
     }
+    linkString += "</p>";
+    console.log(linkString)
+    $urls.append($(linkString));
+
     $urls.css({
-      "left": $node.width() * 1.05
+      "left": $node.width() * 1.05,
+      "width": "100%"
     });
 
     this.redrawNodeConnectors(node);
