@@ -707,13 +707,20 @@ mindmaps.DefaultCanvasView = function() {
       i += 1;
     }
     linkString += "</p>";
-    console.log(linkString)
     $urls.append($(linkString));
 
-    $urls.css({
-      "left": $node.width() * 1.05,
-      "width": "100%"
-    });
+    if (node.isRoot()) {
+      $urls.css({
+        "left": $text.width() * 0.8,
+        "width": $text.width()
+      });
+    }
+    else {
+      $urls.css({
+        "left": $text.width() * 1.2,
+        "width": $text.width()
+      });
+    }
 
     this.redrawNodeConnectors(node);
   };
