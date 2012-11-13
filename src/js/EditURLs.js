@@ -211,8 +211,6 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
     var url = mindmaps.Config.urlServerAddress;
     url += "?q=" +query
 
-    console.log(url)
-
     $.ajax({
       type: "GET",
       url: url
