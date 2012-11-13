@@ -137,7 +137,7 @@ mindmaps.EditURLsView = function() {
       var $option = $('<option value="">No URL selected.</option>');
       $select.prepend($option);
 
-      $select.val(nodeUrls[0]).change();
+      $select.val(nodeUrls[0]);
     }
   }
 
