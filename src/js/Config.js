@@ -8,7 +8,7 @@ mindmaps.Config = (function() {
    */
   return {
     // The URL of the storage server used in ServerStorage.
-    serverStorageUrl: "http://localhost:3000/",
+    storageServerAddress: "http://localhost:3000/",
 
     // Methods of attaching URLs to a node. Deactive all to disallow attaching
     // URLs to nodes.
