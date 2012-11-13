@@ -24,10 +24,10 @@ mindmaps.EditURLsView = function() {
   var $directInputText = $("#urls-direct-input input");
   var $directInputButton = $("#urls-direct-input button");
 
-  var $directInputMultiUrlUi = $("#template-urls-multi-url-display").tmpl();
+  var $multiUrlDisplay = $("#template-urls-multi-url-display").tmpl();
 
-  var $directInputUrlList = $directInputMultiUrlUi.find(".url-list");
-  var $directInputUrlListBody = $directInputUrlList.find("tbody");
+  var $multiUrlList = $multiUrlDisplay.find(".url-list");
+  var $multiUrlListBody = $multiUrlList.find("tbody");
 
   if (mindmaps.Config.allowMultipleUrls) {
     // Multi-URL setup
@@ -57,23 +57,23 @@ mindmaps.EditURLsView = function() {
     $directInputButton.css({ "display": "none" });
   }
 
-  $directInputUrlListBody.delegate("a.delete", "click", function() {
+  $multiUrlListBody.delegate("a.delete", "click", function() {
     var t = $(this).tmplItem();
     self.urlRemoved(t.data.url);
   });
 
   this.setUrls = function(urls) {
     if (mindmaps.Config.allowMultipleUrls) {
-      $directInputUrlListBody.empty();
+      $multiUrlListBody.empty();
 
       if (urls.length === 0) {
-        $directInputUrlListBody.append("<tr><td>No URLs added yet.</td></tr>");
+        $multiUrlListBody.append("<tr><td>No URLs added yet.</td></tr>");
       }
       else {
         urls.forEach(function(url) {
           $("#template-urls-table-item").tmpl({
             "url": url
-          }).appendTo($directInputUrlListBody);
+          }).appendTo($multiUrlListBody);
         });
       }
     }
@@ -85,7 +85,7 @@ mindmaps.EditURLsView = function() {
   this.showDialog = function() {
     if (mindmaps.Config.activateDirectUrlInput) {
       if (mindmaps.Config.allowMultipleUrls) {
-        $directInputDiv.append($directInputMultiUrlUi);
+        $dialog.append($multiUrlDisplay);
       }
     }
     else {
