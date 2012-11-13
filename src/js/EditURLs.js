@@ -147,6 +147,10 @@ mindmaps.EditURLsView = function() {
     $dialog.find('.dropdown-error').text(msg);
   }
 
+  this.showSearchDropdownError = function(msg) {
+    $dialog.find('.search-dropdown-error').text(msg);
+  }
+
   this.showDialog = function() {
     if (mindmaps.Config.allowMultipleUrls) {
       $dialog.append($multiUrlDisplay);
