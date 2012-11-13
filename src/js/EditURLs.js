@@ -89,12 +89,20 @@ mindmaps.EditURLsView = function() {
     }
   }
 
-  this.setDropDownUrls = function(urls) {
+  this.setDropDownUrls = function(urls, nodeUrls) {
     $dropdownInputSelect.empty();
+
     urls.urls.forEach(function(url) {
       var $option = $('<option value="' +url.url+ '">' +url.label+ '</option>');
       $dropdownInputSelect.append($option);
     });
+
+    if (!mindmaps.Config.allowMultipleUrls) {
+      var $option = $('<option value="">No URL selected.</option>');
+      $dropdownInputSelect.prepend($option);
+
+      $dropdownInputSelect.val(nodeUrls[0]).change();
+    }
   }
 
   this.showDropdownError = function(msg) {
@@ -102,13 +110,18 @@ mindmaps.EditURLsView = function() {
   }
 
   this.showDialog = function() {
-    if (mindmaps.Config.activateDirectUrlInput) {
-      if (mindmaps.Config.allowMultipleUrls) {
-        $dialog.append($multiUrlDisplay);
-      }
+    if (mindmaps.Config.allowMultipleUrls) {
+      $dialog.append($multiUrlDisplay);
     }
-    else {
+
+    if (!mindmaps.Config.activateDirectUrlInput) {
       $directInputDiv.css({
+        "display": "none"
+      });
+    }
+
+    if (!mindmaps.Config.activateUrlsFromServerWithoutSearch) {
+      $dropdownInputDiv.css({
         "display": "none"
       });
     }
@@ -161,7 +174,7 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
         url: mindmaps.Config.urlServerAddress
       }).done(function(json) {
         var urls = JSON.parse(json);
-        view.setDropDownUrls(urls);
+        view.setDropDownUrls(urls, mindmapModel.selectedNode.urls);
       }).fail(function() {
         view.showDropdownError("Error while requesting URLs from server.");
       });

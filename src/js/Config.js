@@ -17,7 +17,7 @@ mindmaps.Config = (function() {
     activateUrlsFromServerWithSearch: true,
 
     // Can multiple URLs be attached to a node?
-    allowMultipleUrls: true,
+    allowMultipleUrls: false,
 
     // Address of the URL server.
     urlServerAddress: "http://localhost:3001/"
