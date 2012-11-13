@@ -92,6 +92,7 @@ mindmaps.EditURLsView = function() {
     // Hide all buttons. They're only needed to multi-URL mode.
     $directInputButton.css({ "display": "none" });
     $dropdownInputButton.css({ "display": "none" });
+    $searchDropdownInputAddButton.css({ "display": "none" });
   }
 
   $multiUrlListBody.delegate("a.delete", "click", function() {
