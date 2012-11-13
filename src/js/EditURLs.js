@@ -82,6 +82,10 @@ mindmaps.EditURLsView = function() {
     }
   }
 
+  this.setDropDownUrls = function(urls) {
+    console.log(urls);
+  }
+
   this.showDialog = function() {
     if (mindmaps.Config.activateDirectUrlInput) {
       if (mindmaps.Config.allowMultipleUrls) {
@@ -136,6 +140,18 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
   });
 
   this.go = function() {
+    if (mindmaps.Config.activateUrlsFromServerWithoutSearch) {
+      $.ajax({
+        type: "GET",
+        url: mindmaps.Config.urlServerAddress
+      }).done(function(json) {
+        var urls = JSON.parse(json);
+        view.setDropDownUrls(urls);
+      }).fail(function() {
+        console.error("Error while requesting URLs from server.");
+      });
+    }
+
     view.setUrls(mindmapModel.selectedNode.urls)
     view.showDialog();
   };
