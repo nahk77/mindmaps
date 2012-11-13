@@ -24,7 +24,7 @@ mindmaps.EditURLsView = function() {
   var $directInputSingleUrlUi = $("#template-urls-single-url-ui").tmpl();
   var $directInputSingleUrlInput = $directInputSingleUrlUi.find("input");
 
-  var $directInputMultiUrlUi = $("#template-urls-multi-url-ui").tmpl();
+  var $directInputMultiUrlUi = $("#template-urls-multi-url-display").tmpl();
 
   var $directInputMultiUrlInput = $directInputMultiUrlUi.find("input");
   var $directInputMultiUrlButton = $directInputMultiUrlUi.find("button");
