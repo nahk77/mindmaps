@@ -62,6 +62,7 @@ mindmaps.EditURLsView = function() {
     });
 
     $directInputButton.css({ "display": "none" });
+    $dropdownInputButton.css({ "display": "none" });
   }
 
   $multiUrlListBody.delegate("a.delete", "click", function() {
