@@ -174,6 +174,12 @@ mindmaps.EditURLsView = function() {
       });
     }
 
+    if (!mindmaps.Config.activateUrlsFromServerWithSearch) {
+      $searchDropdownInputDiv.css({
+        "display": "none"
+      });
+    }
+
 
     $dialog.dialog("open");
   };
