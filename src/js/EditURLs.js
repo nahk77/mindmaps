@@ -34,7 +34,7 @@ mindmaps.EditURLsView = function() {
   if (mindmaps.Config.allowMultipleUrls) {
     // Multi-URL setup
 
-    // Set up click on "Add" button
+    // Set up "Add" button (direct input)
     $directInputButton.click(function(){
       self.urlAdded($directInputText.val());
       $directInputText.val("");
@@ -46,6 +46,11 @@ mindmaps.EditURLsView = function() {
         self.urlAdded($directInputText.val());
         $directInputText.val("");
       }
+    });
+
+    // Set up "Add" button (dropdown)
+    $dropdownInputButton.click(function() {
+      self.urlAdded($dropdownInputSelect.val());
     });
   }
   else {
@@ -85,11 +90,11 @@ mindmaps.EditURLsView = function() {
   }
 
   this.setDropDownUrls = function(urls) {
+    $dropdownInputSelect.empty();
     urls.urls.forEach(function(url) {
       var $option = $('<option value="' +url.url+ '">' +url.label+ '</option>');
       $dropdownInputSelect.append($option);
     });
-    console.log(urls);
   }
 
   this.showDialog = function() {
