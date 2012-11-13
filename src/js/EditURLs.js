@@ -37,6 +37,18 @@ mindmaps.EditURLsView = function() {
   var $multiUrlList = $multiUrlDisplay.find(".url-list");
   var $multiUrlListBody = $multiUrlList.find("tbody");
 
+  // Set up "Search" button (dropdown with search)
+  $searchDropdownInputSearchButton.click(function() {
+    self.searchQuerySubmitted($searchDropdownInputText.val());
+  });
+
+  // Pressing enter in search field should behave like "Search" click
+  $searchDropdownInputText.keypress(function(e) {
+    if (e.which === 13) {
+      self.searchQuerySubmitted($searchDropdownInputText.val());
+    }
+  });
+
   if (mindmaps.Config.allowMultipleUrls) {
     // Multi-URL setup
 
@@ -57,18 +69,6 @@ mindmaps.EditURLsView = function() {
     // Set up "Add" button (dropdown)
     $dropdownInputButton.click(function() {
       self.urlAdded($dropdownInputSelect.val());
-    });
-
-    // Set up "Search" button (dropdown with search)
-    $searchDropdownInputSearchButton.click(function() {
-      self.searchQuerySubmitted($searchDropdownInputText.val());
-    });
-
-    // Pressing enter in search field should behave like "Search" click
-    $searchDropdownInputText.keypress(function(e) {
-      if (e.which === 13) {
-        self.searchQuerySubmitted($searchDropdownInputText.val());
-      }
     });
 
     // Set up "Add" button (dropdown with search)
