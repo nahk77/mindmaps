@@ -97,6 +97,10 @@ mindmaps.EditURLsView = function() {
     });
   }
 
+  this.showDropdownError = function(msg) {
+    $dialog.find('.dropdown-error').text(msg);
+  }
+
   this.showDialog = function() {
     if (mindmaps.Config.activateDirectUrlInput) {
       if (mindmaps.Config.allowMultipleUrls) {
@@ -159,7 +163,7 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
         var urls = JSON.parse(json);
         view.setDropDownUrls(urls);
       }).fail(function() {
-        console.error("Error while requesting URLs from server.");
+        view.showDropdownError("Error while requesting URLs from server.");
       });
     }
 
