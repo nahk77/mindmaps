@@ -30,6 +30,8 @@ mindmaps.EditURLsView = function() {
   var $searchDropdownInputDiv = $("#urls-search-dropdown-input");
   var $searchDropdownInputText = $("#urls-search-dropdown-input input");
   var $searchDropdownInputSearchButton = $("#urls-search-dropdown-input .search");
+  var $searchDropdownInputSelect = $("#urls-search-dropdown-input select");
+  var $searchDropdownInputAddButton = $("#urls-search-dropdown-input .add");
 
   var $multiUrlDisplay = $("#template-urls-multi-url-display").tmpl();
   var $multiUrlList = $multiUrlDisplay.find(".url-list");
@@ -67,6 +69,11 @@ mindmaps.EditURLsView = function() {
       if (e.which === 13) {
         self.searchQuerySubmitted($searchDropdownInputText.val());
       }
+    });
+
+    // Set up "Add" button (dropdown with search)
+    $searchDropdownInputAddButton.click(function() {
+      self.urlAdded($searchDropdownInputSelect.val());
     });
   }
   else {
@@ -112,20 +119,28 @@ mindmaps.EditURLsView = function() {
     }
   }
 
-  this.setDropDownUrls = function(urls, nodeUrls) {
-    $dropdownInputSelect.empty();
+  function setGenericDropDownUrls(urls, nodeUrls, $select) {
+    $select.empty();
 
     urls.urls.forEach(function(url) {
       var $option = $('<option value="' +url.url+ '">' +url.label+ '</option>');
-      $dropdownInputSelect.append($option);
+      $select.append($option);
     });
 
     if (!mindmaps.Config.allowMultipleUrls) {
       var $option = $('<option value="">No URL selected.</option>');
-      $dropdownInputSelect.prepend($option);
+      $select.prepend($option);
 
-      $dropdownInputSelect.val(nodeUrls[0]).change();
+      $select.val(nodeUrls[0]).change();
     }
+  }
+
+  this.setDropDownUrls = function(urls, nodeUrls) {
+    setGenericDropDownUrls(urls, nodeUrls, $dropdownInputSelect);
+  }
+
+  this.setSearchDropDownUrls = function(urls, nodeUrls) {
+    setGenericDropDownUrls(urls, nodeUrls, $searchDropdownInputSelect);
   }
 
   this.showDropdownError = function(msg) {
@@ -193,9 +208,9 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
       url: url
     }).done(function(json) {
       var urls = JSON.parse(json);
-      view.setDropDownUrls(urls, mindmapModel.selectedNode.urls);
+      view.setSearchDropDownUrls(urls, mindmapModel.selectedNode.urls);
     }).fail(function() {
-      view.showDropdownError("Error while requesting URLs from server.");
+      view.showSearchDropdownError("Error while requesting URLs from server.");
     });
   }
 
