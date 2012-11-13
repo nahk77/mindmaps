@@ -61,6 +61,12 @@ mindmaps.EditURLsView = function() {
       self.singleUrlChanged($directInputText.val());
     });
 
+    // Save URL that is selected in dropdown to node.
+    $dropdownInputSelect.change(function() {
+      self.singleUrlChanged($dropdownInputSelect.val());
+    });
+
+    // Hide all buttons. They're only needed to multi-URL mode.
     $directInputButton.css({ "display": "none" });
     $dropdownInputButton.css({ "display": "none" });
   }
