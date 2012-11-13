@@ -19,34 +19,43 @@ mindmaps.EditURLsView = function() {
     }
   });
 
-  var $directInputDiv = $("#urls-text-field");
+  var $directInputDiv = $("#urls-direct-input");
 
-  var $directInputSingleUrlUi = $("#template-urls-single-url-ui").tmpl();
-  var $directInputSingleUrlInput = $directInputSingleUrlUi.find("input");
+  var $directInputText = $("#urls-direct-input input");
+  var $directInputButton = $("#urls-direct-input button");
 
   var $directInputMultiUrlUi = $("#template-urls-multi-url-display").tmpl();
-
-  var $directInputMultiUrlInput = $directInputMultiUrlUi.find("input");
-  var $directInputMultiUrlButton = $directInputMultiUrlUi.find("button");
 
   var $directInputUrlList = $directInputMultiUrlUi.find(".url-list");
   var $directInputUrlListBody = $directInputUrlList.find("tbody");
 
-  $directInputSingleUrlInput.bind("change keyup", function() {
-    self.singleUrlChanged($directInputSingleUrlInput.val());
-  });
+  if (mindmaps.Config.allowMultipleUrls) {
+    // Multi-URL setup
 
-  $directInputMultiUrlButton.click(function(){
-    self.urlAdded($directInputMultiUrlInput.val());
-    $directInputMultiUrlInput.val("");
-  })
+    // Set up click on "Add" button
+    $directInputButton.click(function(){
+      self.urlAdded($directInputText.val());
+      $directInputText.val("");
+    });
 
-  $directInputMultiUrlInput.keypress(function(e) {
-    if (e.which === 13) {
-      self.urlAdded($directInputMultiUrlInput.val());
-      $directInputMultiUrlInput.val("");
-    }
-  })
+    // Pressing enter in text field should behave like "Add" click
+    $directInputText.keypress(function(e) {
+      if (e.which === 13) {
+        self.urlAdded($directInputText.val());
+        $directInputText.val("");
+      }
+    });
+  }
+  else {
+    // Single-URL setup
+
+    // Save any changes in the text field immediately.
+    $directInputText.bind("change keyup", function() {
+      self.singleUrlChanged($directInputText.val());
+    });
+
+    $directInputButton.css({ "display": "none" });
+  }
 
   $directInputUrlListBody.delegate("a.delete", "click", function() {
     var t = $(this).tmplItem();
@@ -69,7 +78,7 @@ mindmaps.EditURLsView = function() {
       }
     }
     else {
-      $directInputSingleUrlInput.val(urls[0]);
+      $directInputText.val(urls[0]);
     }
   }
 
@@ -77,9 +86,6 @@ mindmaps.EditURLsView = function() {
     if (mindmaps.Config.activateDirectUrlInput) {
       if (mindmaps.Config.allowMultipleUrls) {
         $directInputDiv.append($directInputMultiUrlUi);
-      }
-      else {
-        $directInputDiv.append($directInputSingleUrlUi);
       }
     }
     else {
