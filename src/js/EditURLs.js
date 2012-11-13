@@ -27,6 +27,10 @@ mindmaps.EditURLsView = function() {
   var $dropdownInputSelect = $("#urls-dropdown-input select");
   var $dropdownInputButton = $("#urls-dropdown-input button");
 
+  var $searchDropdownInputDiv = $("#urls-search-dropdown-input");
+  var $searchDropdownInputText = $("#urls-search-dropdown-input input");
+  var $searchDropdownInputSearchButton = $("#urls-search-dropdown-input .search");
+
   var $multiUrlDisplay = $("#template-urls-multi-url-display").tmpl();
   var $multiUrlList = $multiUrlDisplay.find(".url-list");
   var $multiUrlListBody = $multiUrlList.find("tbody");
@@ -51,6 +55,18 @@ mindmaps.EditURLsView = function() {
     // Set up "Add" button (dropdown)
     $dropdownInputButton.click(function() {
       self.urlAdded($dropdownInputSelect.val());
+    });
+
+    // Set up "Search" button (dropdown with search)
+    $searchDropdownInputSearchButton.click(function() {
+      self.searchQuerySubmitted($searchDropdownInputText.val());
+    });
+
+    // Pressing enter in search field should behave like "Search" click
+    $searchDropdownInputText.keypress(function(e) {
+      if (e.which === 13) {
+        self.searchQuerySubmitted($searchDropdownInputText.val());
+      }
     });
   }
   else {
@@ -164,6 +180,23 @@ mindmaps.EditURLsPresenter = function(eventBus, mindmapModel, view) {
     var action = new mindmaps.action.RemoveURLsAction(
         mindmapModel.selectedNode, url);
     mindmapModel.executeAction(action);
+  }
+
+  view.searchQuerySubmitted = function(query) {
+    var url = mindmaps.Config.urlServerAddress;
+    url += "?q=" +query
+
+    console.log(url)
+
+    $.ajax({
+      type: "GET",
+      url: url
+    }).done(function(json) {
+      var urls = JSON.parse(json);
+      view.setDropDownUrls(urls, mindmapModel.selectedNode.urls);
+    }).fail(function() {
+      view.showDropdownError("Error while requesting URLs from server.");
+    });
   }
 
   eventBus.subscribe(mindmaps.Event.NODE_URLS_ADDED, function(node) {
