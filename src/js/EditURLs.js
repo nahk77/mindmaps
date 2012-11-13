@@ -20,12 +20,14 @@ mindmaps.EditURLsView = function() {
   });
 
   var $directInputDiv = $("#urls-direct-input");
-
   var $directInputText = $("#urls-direct-input input");
   var $directInputButton = $("#urls-direct-input button");
 
-  var $multiUrlDisplay = $("#template-urls-multi-url-display").tmpl();
+  var $dropdownInputDiv = $("#urls-dropdown-input");
+  var $dropdownInputSelect = $("#urls-dropdown-input select");
+  var $dropdownInputButton = $("#urls-dropdown-input button");
 
+  var $multiUrlDisplay = $("#template-urls-multi-url-display").tmpl();
   var $multiUrlList = $multiUrlDisplay.find(".url-list");
   var $multiUrlListBody = $multiUrlList.find("tbody");
 
@@ -83,6 +85,10 @@ mindmaps.EditURLsView = function() {
   }
 
   this.setDropDownUrls = function(urls) {
+    urls.urls.forEach(function(url) {
+      var $option = $('<option value="' +url.url+ '">' +url.label+ '</option>');
+      $dropdownInputSelect.append($option);
+    });
     console.log(urls);
   }
 
