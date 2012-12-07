@@ -267,6 +267,7 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
     eventBus.subscribe(mindmaps.Event.NODE_TEXT_CAPTION_CHANGED, function(
         node) {
       view.setNodeText(node, node.getCaption());
+      view.updateNode(node);
 
       // redraw node in case height has changed
       // TODO maybe only redraw if height has changed
