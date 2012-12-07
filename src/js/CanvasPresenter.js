@@ -296,6 +296,7 @@ mindmaps.CanvasPresenter = function(eventBus, commandRegistry, mindmapModel,
 
     eventBus.subscribe(mindmaps.Event.NODE_CREATED, function(node) {
       view.createNode(node);
+      view.updateNode(node);
 
       // edit node caption immediately if requested
       if (node.shouldEditCaption) {
