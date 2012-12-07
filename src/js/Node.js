@@ -47,6 +47,7 @@ mindmaps.Node.prototype.clone = function() {
   clone.text = text;
   clone.urls = this.urls.map(function(element) { return element });
   clone.notes = this.notes;
+  clone.lineWidthOffset = this.lineWidthOffset;
   clone.offset = this.offset.clone();
   clone.foldChildren = this.foldChildren;
   clone.branchColor = this.branchColor;
