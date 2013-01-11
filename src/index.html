@@ -13,10 +13,21 @@
 <meta name="google" content="notranslate"/>
 <title>mindmaps</title>
 <link rel="icon" type="image/png" href="img/favicon.png" />
+
+
+   <link rel="stylesheet" type="text/css" href="css/main.css"/>
+   <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Schoolbell:regular"/>
+   <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.9.1.custom.min.css"/>
+   <link rel="stylesheet" type="text/css" href="css/colorpicker.css"/>
+
+
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/Aristo/jquery-ui-1.8.7.custom.css" />
 <link rel="stylesheet" href="css/minicolors/jquery.miniColors.css">
+
 
 <script id="template-float-panel" type="text/x-jquery-tmpl">
 <div class="ui-widget ui-dialog ui-corner-all ui-widget-content float-panel no-select">
@@ -94,7 +105,7 @@
   <span class="cloud-error error"></span>
   <div class="seperator"></div>
   <h1>Local Storage</h1>
-  <p>You can save your mind map in your browser's local storage. Be aware that this is still experimental: the space is limited and there is no guarantee that the browser will keep this document forever. Useful for frequent backups in combination with cloud storage.</p>
+  <p>You can save your mind map in your browser s local storage. Be aware that this is still experimental: the space is limited and there is no guarantee that the browser will keep this document forever. Useful for frequent backups in combination with cloud storage.</p>
   <button id="button-save-localstorage">Save</button>
   <input type="checkbox" class="autosave" id="checkbox-autosave-localstorage">
   <label for="checkbox-autosave-localstorage">Save automatically every minute.</label>
@@ -261,6 +272,58 @@
 </div>
 </script>
 
+
+
+
+<script id="template-draw" type="text/x-jquery-tmpl">
+    <div>
+        <div id="left-panel">
+            <a id="right-button">Tools</a>
+            <div id="canvas-panel" class="block">
+                <canvas id="drawingCanvas" width="500" height="500"></canvas>
+                <canvas id="overlay" width="500" height="500"
+                onSelectStart="setCursor(this); return false;"></canvas>
+            </div>
+        </div>
+        <div id="right-panel">
+            <div id="stroke-colour-picker"></div>
+            <div id="brush-panel">
+                <span>Brush Size:</span>
+                <div id="brush_slider"></div>
+            </div>
+            <div id="tools-panel" class="block" >
+                <ul>
+                    <li class="tool-panel-button tool-button selected">
+                        <img id="pencil-tool" src="images/tools_panel_pencil_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="spray-tool" src="images/tools_panel_spray_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="paint-tool" src="images/tools_panel_paint_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="colour-picker-tool" src="images/tools_panel_colour_picker_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="eraser-tool" src="images/tools_panel_eraser_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="undo-tool" src="images/tools_panel_undo_button.png" class="block, fill" />
+                    </li>
+                    <li class="tool-panel-button tool-button">
+                        <img id="delete-tool" src="images/tools_panel_delete_button.png" class="block, fill" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+
+
 <script id="template-export-map" type="text/x-jquery-tmpl">
 <div id="export-map-dialog" title="Export mind map">
   <h2 class='image-description'>To download the map right-click the
@@ -321,6 +384,17 @@
   <!-- /DEBUG -->
 
   <!-- JS:LIB:BEGIN -->
+
+
+    <script type="text/javascript" src="js/libs/jquery/jquery-1.8.2.js"></script>
+   <script type="text/javascript" src="js/libs/jquery/jquery-ui-1.9.1.custom.min.js"></script>
+   <script type="text/javascript" src="js/libs/rxjs/rx.js"></script>
+   <script type="text/javascript" src="js/libs/rxjs/rx.jQuery.js"></script>
+   <script type="text/javascript" src="js/libs/mootools/mootools-core-1.4.5-full-compat-yc.js"></script>
+   <script type="text/javascript" src="js/libs/mootools/mootools-more-1.4.0.1.js"></script>
+   <script type="text/javascript" src="js/libs/modernizr/modernizr-1.6.min.js"></script>
+   <script type="text/javascript" src="js/libs/colorpicker/colorpicker.js"></script>
+
   <script src="js/libs/jquery-ui-1.8.11.custom.min.js"></script>
   <script src="js/libs/dragscrollable.js"></script>
   <script src="js/libs/jquery.hotkeys.js"></script>
@@ -331,6 +405,12 @@
   <script src="js/libs/downloadify.min.js"></script>
   <script src="js/libs/events.js"></script>
   <script src="js/libs/jquery.ie.cors.js"></script>
+
+
+   <script type="text/javascript" src="js/layout.js"></script>
+   <script type="text/javascript" src="js/brushes.js"></script>
+   <script type="text/javascript" src="js/canvas.js"></script>
+
 
   <script src="js/MindMaps.js"></script>
   <script src="js/Config.js"></script>
@@ -352,6 +432,9 @@
   <script src="js/FloatPanel.js"></script>
   <script src="js/Navigator.js"></script>
   <script src="js/Inspector.js"></script>
+
+  <script type="text/javascript" src="js/Draw.js"></script>
+
   <script src="js/ToolBar.js"></script>
   <script src="js/StatusBar.js"></script>
   <script src="js/CanvasDrawingTools.js"></script>
@@ -372,6 +455,9 @@
   <script src="js/ExportMap.js"></script>
   <script src="js/AutoSaveController.js"></script>
   <script src="js/FilePicker.js"></script>
+
+
+
   <!-- JS:LIB:END -->
 
   <!-- PRODUCTION
