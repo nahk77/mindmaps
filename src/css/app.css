@@ -497,6 +497,11 @@ html,body {
   border-bottom: 1px solid #E5E5E5;
 }
 
+#inspector-imgData {
+  padding: 4px 0px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
 .file-dialog {
   /* overwrite aristo behaviour */
   padding: 10px !important;

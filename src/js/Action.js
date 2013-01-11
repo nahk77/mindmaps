@@ -503,3 +503,13 @@ mindmaps.action.ChangeNotesAction = function(node, text) {
 
   this.event = [ mindmaps.Event.NODE_NOTES_CHANGED, node ];
 }
+
+mindmaps.action.ChangeImgDataAction = function(node, text) {
+  this.execute = function() {
+    node.imgData = text;
+  };
+
+  this.event = [ mindmaps.Event.NODE_IMGDATA_CHANGED, node ];
+}
+
+

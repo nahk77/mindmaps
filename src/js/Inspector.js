@@ -30,6 +30,8 @@ mindmaps.InspectorView = function() {
       $linethroughCheckbox, $branchColorChildrenButton, $openURLDialogButton ];
   var $allColorpickers = [ branchColorPicker, fontColorPicker ];
   var $notesTextArea = $("#inspector-notes-textarea", $content);
+    var $imgDataTextArea = $("#inspector-imgData-textarea", $content);
+
 
   /**
    * Returns a jquery object.
@@ -117,6 +119,10 @@ mindmaps.InspectorView = function() {
    */
   this.setNotesTextAreaContents = function(text) {
     $notesTextArea.val(text)
+  };
+
+  this.setImgDataTextAreaContents = function(text) {
+    $imgDataTextArea.val(text)
   };
 
   /**
@@ -240,6 +246,10 @@ mindmaps.InspectorView = function() {
 
     $notesTextArea.bind('change keyup', function(changeEvent) {
       self.notesTextAreaChanged($notesTextArea.val());
+    });
+
+     $imgDataTextArea.bind('change keyup', function(changeEvent) {
+      self.imgDataTextAreaChanged($imgDataTextArea.val());
     })
   };
 };
@@ -349,6 +359,12 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, 
     mindmapModel.executeAction(action);
   }
 
+   view.imgDataTextAreaChanged = function(text) {
+    var action = new mindmaps.action.ChangeImgDataAction(
+        mindmapModel.selectedNode, text);
+    mindmapModel.executeAction(action);
+  }
+
   /**
    * Update view on font events.
    */
@@ -396,7 +412,8 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, 
     view.setLinethroughCheckboxState(font.decoration === "line-through");
     view.setFontColorPickerColor(font.color);
     view.setBranchColorPickerColor(node.branchColor);
-    view.setNotesTextAreaContents(node.notes)
+    view.setNotesTextAreaContents(node.notes);
+    view.setImgDataTextAreaContents(node.imgData)
   }
 
   this.go = function() {

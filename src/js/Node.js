@@ -20,6 +20,7 @@ mindmaps.Node = function() {
   };
   this.urls = [];
   this.notes = "";
+  this.imgData="";
   this.lineWidthOffset = 0;
   this.offset = new mindmaps.Point();
   this.foldChildren = false;
@@ -47,6 +48,7 @@ mindmaps.Node.prototype.clone = function() {
   clone.text = text;
   clone.urls = this.urls.map(function(element) { return element });
   clone.notes = this.notes;
+  clone.imgData=this.imgData;
   clone.lineWidthOffset = this.lineWidthOffset;
   clone.offset = this.offset.clone();
   clone.foldChildren = this.foldChildren;
@@ -82,6 +84,7 @@ mindmaps.Node.fromObject = function(obj) {
   node.text = obj.text;
   node.urls = obj.urls;
   node.notes = obj.notes;
+  node.imgData=obj.imgData;
   node.lineWidthOffset = obj.lineWidthOffset;
   node.offset = mindmaps.Point.fromObject(obj.offset);
   node.foldChildren = obj.foldChildren;
@@ -122,6 +125,7 @@ mindmaps.Node.prototype.toJSON = function() {
     text : this.text,
     urls : this.urls,
     notes : this.notes,
+    imgData:this.imgData,
     lineWidthOffset : this.lineWidthOffset,
     offset : this.offset,
     foldChildren : this.foldChildren,
