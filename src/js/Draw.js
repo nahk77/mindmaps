@@ -1,8 +1,8 @@
 mindmaps.DrawView = function() {
   var self = this;
+     
   var $content = $("#template-draw").tmpl();
   
-
 
   /**
    * Returns a jquery object.
@@ -42,7 +42,9 @@ mindmaps.DrawView = function() {
     initializeCanvas();
 
     // load the images
-    loadImages();                
+    loadImages();   
+
+    initDrawPanel ();
   };
 
   

@@ -39,7 +39,7 @@ function clearDrawing() {
     drawingCanvasCxt.fillRect(0, 0, drawingCanvas.width(), drawingCanvas.height());
     var img = new Image();
     //img.src = 'images/chicken.jpg';
-    img.src = initImgUrl;
+    //img.src = initImgUrl;
     img.onload = function(){
         drawingCanvasCxt.drawImage(img, 0,0);
         img = null;
@@ -61,7 +61,7 @@ function getElementOffset(element) {
 
 // works out the X, Y position of the click INSIDE the canvas from the X, Y 
 // position on the page
-function getPosition(mouseEvent, element) {
+function getMPosition(mouseEvent, element) {
     var x, y;
     if (mouseEvent.pageX !== undefined && mouseEvent.pageY !== undefined) {
         x = mouseEvent.pageX;
@@ -84,22 +84,23 @@ function setBrush(brushName) {
     // start drawing when the mousedown event fires, and attach handlers to 
     // draw a line to wherever the mouse moves to
     overlayCanvas.unbind("mousedown").mousedown(function (mouseEvent) {
+        setCanvasOffsets();
         var overlayCanvasElement = overlayCanvas.get(0);
-        var position = getPosition(mouseEvent, overlayCanvasElement);
+        var position = getMPosition(mouseEvent, overlayCanvasElement);
 
         currentBrush.startDrawing(position);
 
         // attach event handlers
         $(this).mousemove(function (event) {
-            var newPosition = getPosition(event, overlayCanvasElement);
+            var newPosition = getMPosition(event, overlayCanvasElement);
             currentBrush.draw(newPosition);
         }).mouseup(function (event) {
-            var newPosition = getPosition(event, overlayCanvasElement);
+            var newPosition = getMPosition(event, overlayCanvasElement);
             currentBrush.finishDrawing(newPosition);
 
             unbindMouseEvents();
         }).mouseout(function (event) {
-            var newPosition = getPosition(event, overlayCanvasElement);
+            var newPosition = getMPosition(event, overlayCanvasElement);
             currentBrush.finishDrawing(newPosition);
 
             unbindMouseEvents();
@@ -152,7 +153,7 @@ function initializeCanvas() {
     outputImage = document.getElementById("output-img");
     var img = new Image();
 //    img.src = 'images/chicken.jpg';
-    img.src=initImgUrl;
+    //img.src=initImgUrl;
     img.onload = function(){
         drawingCanvasCxt.drawImage(img, 0,0);
         img = null;

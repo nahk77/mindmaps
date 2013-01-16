@@ -1,8 +1,7 @@
 // initialize the controls
-$(function () {
-
+function initDrawPanel(){
     window.initImgUrl='images/chicken.jpg';
-
+    $('#right-panel').hide();
     $("#right-button").click(function(){$('#right-panel').toggle();});
 
     // set up colour picker
@@ -29,6 +28,9 @@ $(function () {
         $(".tool-button").removeClass("selected");
         $(this).parent().addClass("selected");
     });
+
+    console.log('set click');
+    console.log($('#spray-tool'))
 
     $("#spray-tool").click(function () {
         setBrush("spray");
@@ -57,4 +59,4 @@ $(function () {
         $(".tool-button").removeClass("selected");
         $(this).parent().addClass("selected");
     });
-});
+}
