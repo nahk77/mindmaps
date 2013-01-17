@@ -359,11 +359,6 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, 
     mindmapModel.executeAction(action);
   }
 
-   view.imgDataTextAreaChanged = function(text) {
-    var action = new mindmaps.action.ChangeImgDataAction(
-        mindmapModel.selectedNode, text);
-    mindmapModel.executeAction(action);
-  }
 
   /**
    * Update view on font events.
@@ -413,7 +408,8 @@ mindmaps.InspectorPresenter = function(eventBus, mindmapModel, commandRegistry, 
     view.setFontColorPickerColor(font.color);
     view.setBranchColorPickerColor(node.branchColor);
     view.setNotesTextAreaContents(node.notes);
-    view.setImgDataTextAreaContents(node.imgData)
+
+
   }
 
   this.go = function() {

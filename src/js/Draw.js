@@ -1,8 +1,11 @@
-mindmaps.DrawView = function() {
+mindmaps.DrawView = function(savingCallBack) {
   var self = this;
      
   var $content = $("#template-draw").tmpl();
   
+
+  
+
 
   /**
    * Returns a jquery object.
@@ -36,7 +39,7 @@ mindmaps.DrawView = function() {
       max: 100,
     }).slider({value:10});
 
-
+    
 
     // initialize the canvas
     initializeCanvas();
@@ -44,7 +47,12 @@ mindmaps.DrawView = function() {
     // load the images
     loadImages();   
 
-    initDrawPanel ();
+    initDrawPanel (this.imgDataSaving);
+
+
+
+    
+
   };
 
   
@@ -78,4 +86,48 @@ mindmaps.DrawView = function() {
   }
 }
 
+
+mindmaps.DrawPresenter = function(eventBus, mindmapModel, commandRegistry, view) {
+  var self = this;
+
+  eventBus.subscribe(mindmaps.Event.NODE_SELECTED, function(node) {
+      updateView(node);
+    });
+
+  this.go = function() {
+    view.init();
+  };
+
+  function updateView(node){
+    self.setImgData(node.imgData)
+  }
+
+  this.setImgData=function(dataURL){
+
+    if(dataURL==""){
+      clearDrawing();
+    }
+
+    var canvas =drawingCanvas.get(0)
+    var context = canvas.getContext('2d');
+
+    // load image from data url
+    var imageObj = new Image();
+    imageObj.onload = function() {
+      context.drawImage(this, 0, 0);
+    };
+
+    imageObj.src = dataURL;
+  }
+
+
+view.imgDataSaving = function(data) {
+  console.log("action here");
+    var action = new mindmaps.action.ChangeImgDataAction(
+        mindmapModel.selectedNode, data);
+    mindmapModel.executeAction(action);
+  }
+
+
+};
 

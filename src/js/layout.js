@@ -1,8 +1,15 @@
 // initialize the controls
-function initDrawPanel(){
+function initDrawPanel(savingCallback){
     window.initImgUrl='images/chicken.jpg';
     $('#right-panel').hide();
     $("#right-button").click(function(){$('#right-panel').toggle();});
+
+
+    $("#save-button").click(function(){
+        console.log(drawingCanvas.get(0).toDataURL());
+        console.log(overlayCanvas.get(0).toDataURL());
+        savingCallback(drawingCanvas.get(0).toDataURL());
+    });
 
     // set up colour picker
     var strokeColourPicker = $("#stroke-colour-picker");
@@ -28,9 +35,6 @@ function initDrawPanel(){
         $(".tool-button").removeClass("selected");
         $(this).parent().addClass("selected");
     });
-
-    console.log('set click');
-    console.log($('#spray-tool'))
 
     $("#spray-tool").click(function () {
         setBrush("spray");

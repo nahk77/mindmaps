@@ -267,7 +267,7 @@
       <p>ImgData:</p>
       <textarea id="inspector-imgData-textarea" rows="4"/>
     </div>
-
+     <button id="draw-pad-button" title="Draw Pad" class="buttons-small buttons-less-padding">Draw Pad</button>
   </div>
 </div>
 </script>
@@ -278,7 +278,10 @@
 <script id="template-draw" type="text/x-jquery-tmpl">
     <div>
         <div id="left-panel">
-            <a id="right-button">Tools</a>
+        <button id="right-button" title="Tools" class="buttons-small buttons-less-padding">Tools</button>
+
+        <button id="save-button" title="Save" class="buttons-small buttons-less-padding">Save</button>
+
             <div id="canvas-panel" class="block">
                 <canvas id="drawingCanvas" width="500" height="500"></canvas>
                 <canvas id="overlay" width="500" height="500"
