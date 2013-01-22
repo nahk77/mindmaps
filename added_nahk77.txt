@@ -1,0 +1,1 @@
+This fork was made to add some functions to drichard's MindMaps, via the hannobraun fork
