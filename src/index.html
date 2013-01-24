@@ -96,6 +96,13 @@
   <div class="seperator"></div>
   <h1>Local Storage</h1>
   <p>You can save your mind map in your browser's local storage. Be aware that this is still experimental: the space is limited and there is no guarantee that the browser will keep this document forever. Useful for frequent backups in combination with cloud storage.</p>
+  
+  <input type="radio" name="myOptions" id="myOptions_local" value="Save to local storage" checked /><label for="myOptions_local">Save to local storage</label> <br>
+  <input type="radio" name="myOptions" id="myOptions_file" value="Save to file (offline/debug mode)" /><label for="myOptions_file">Save to file (offline/debug mode)</label> <label for="myOptions_encodeKey"> Encode Key: </label><input type="input"  id="myOptions_encodeKey" value=""  /> <br>
+  <input type="radio" name="myOptions" id="myOptions_createPresentation"  /><label for="myOptions_createPresentation">Create presentation file</label><br>
+  <input type="radio" name="myOptions" id="myOptions_createPresentationVisible"   /><label for="myOptions_createPresentation">Create presentation file (only shown branches)</label><br>
+  <input type="radio" name="myOptions" id="myOptions_codePresentation"   /><label for="myOptions_codePresentation">Save presentation file</label><br>
+
   <button id="button-save-localstorage">Save</button>
   <input type="checkbox" class="autosave" id="checkbox-autosave-localstorage">
   <label for="checkbox-autosave-localstorage">Save automatically every minute.</label>
