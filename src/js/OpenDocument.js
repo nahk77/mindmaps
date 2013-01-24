@@ -188,7 +188,21 @@ mindmaps.OpenDocumentPresenter = function(eventBus, mindmapModel, view, filePick
     var reader = new FileReader();
     reader.onload = function() {
       try {
-        var doc = mindmaps.Document.fromJSON(reader.result);
+        if ( document.getElementById('myOptions_decodeKey').value !="")  { //     decode key present
+  	      var to_dec=reader.result ;
+		      to_dec=  to_dec.replace(/caption":"(.*?)","font/g, function(a, b) {  
+			      var xor_key=document.getElementById('myOptions_decodeKey').value ;
+			      var the_res="";//the result will be here
+					  for(i=0;i<b.length;i++){
+				        the_res += String.fromCharCode(xor_key^b.charCodeAt(i));
+			      }
+			      return ('caption":"'+ the_res+'","font');
+			     }) ; 
+			    var doc = mindmaps.Document.fromJSON( to_dec);  
+	      } else { //no decode key present
+			    var doc = mindmaps.Document.fromJSON(reader.result);
+	      } ;
+	      //~ end of decode sequence
       } catch (e) {
         eventBus.publish(mindmaps.Event.NOTIFICATION_ERROR, 'File is not a valid mind map!');
         throw new Error('Error while opening map from hdd', e);
